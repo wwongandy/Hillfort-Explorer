@@ -11,4 +11,6 @@
     <string name="select_hillfort_image">Select hillfort image</string>
     <string name="change_hillfort_image">Change hillfort image</string>
     <string name="button_addImage">Choose Image</string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">Map</string>
 </resources>
