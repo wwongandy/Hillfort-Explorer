@@ -26,7 +26,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
+        var edit = false
         if (intent.hasExtra("hillfort_edit")) {
+            edit = true
+
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
@@ -38,14 +41,17 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = description.text.toString()
 
-            if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
+            if (hillfort.title.isEmpty() || hillfort.description.isEmpty()) {
+                toast(R.string.enter_hillfort_title)
+            } else {
 
-                app.hillforts.create(hillfort.copy())
-
+                if (edit) {
+                    app.hillforts.update(hillfort.copy())
+                } else {
+                    app.hillforts.create(hillfort.copy())
+                }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
-            } else {
-                toast(R.string.enter_hillfort_title)
             }
         }
     }
