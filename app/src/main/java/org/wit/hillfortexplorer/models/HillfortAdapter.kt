@@ -7,7 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.wit.hillfortexplorer.R
 
-class HillfortAdapter constructor(private var hillforts: List<HillfortModel>):
+interface HillfortListener {
+    fun onHillfortClick(hillfort: HillfortModel)
+}
+
+class HillfortAdapter constructor(
+    private var hillforts: List<HillfortModel>,
+    private val listener: HillfortListener
+):
     RecyclerView.Adapter<HillfortAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -22,16 +29,17 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>):
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val hillfort = hillforts[holder.adapterPosition]
-        holder.bind(hillfort)
+        holder.bind(hillfort, listener)
     }
 
     override fun getItemCount(): Int = hillforts.size
 
     class MainHolder constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-        fun bind(hillfort: HillfortModel) {
+        fun bind(hillfort: HillfortModel, listener: HillfortListener) {
             itemView.hillfortTitle.text = hillfort.title
             itemView.description.text = hillfort.description
+            itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
         }
     }
 }
