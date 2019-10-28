@@ -44,7 +44,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
-                toast("Please provide a title and description for the Hillfort")
+                toast(R.string.enter_hillfort_title)
             }
         }
     }
