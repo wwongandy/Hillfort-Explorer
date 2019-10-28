@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
+import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
@@ -35,7 +36,7 @@ class HillfortListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<HillfortActivity(0)
+            R.id.item_add -> startActivityForResult<HillfortActivity>(0)
         }
         return super.onOptionsItemSelected(item)
     }
