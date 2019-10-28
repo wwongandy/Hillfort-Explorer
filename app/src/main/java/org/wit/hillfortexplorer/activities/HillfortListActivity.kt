@@ -43,6 +43,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
-        startActivityForResult(intentFor<HillfortActivity>(), 0)
+        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
     }
 }
