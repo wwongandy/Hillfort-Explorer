@@ -33,7 +33,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
             if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
 
-                app.hillforts.add(hillfort.copy())
+                app.hillforts.create(hillfort.copy())
                 info("Add button pressed: $hillfort")
 
                 setResult(AppCompatActivity.RESULT_OK)
