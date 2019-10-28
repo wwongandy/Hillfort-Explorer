@@ -12,5 +12,8 @@ class MainApp : Application(), AnkoLogger {
     override fun onCreate() {
         super.onCreate()
         info("Hillfort Explorer started")
+
+        hillforts.add(HillfortModel("Hillfort 1", "The first hillfort found"))
+        hillforts.add(HillfortModel("Hillfort 2", "The second hillfort found"))
     }
 }
