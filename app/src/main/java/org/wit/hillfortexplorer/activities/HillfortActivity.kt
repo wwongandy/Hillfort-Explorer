@@ -9,6 +9,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
 
@@ -16,6 +17,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
     lateinit var app : MainApp
+
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }
+        }
+
+        chooseImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
         }
     }
 
