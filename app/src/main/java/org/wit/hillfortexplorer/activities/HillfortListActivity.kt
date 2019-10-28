@@ -15,4 +15,3 @@ class HillfortListActivity : AppCompatActivity() {
         app = application as MainApp
     }
 }
-}
