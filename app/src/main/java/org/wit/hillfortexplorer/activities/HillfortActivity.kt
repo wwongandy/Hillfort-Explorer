@@ -30,6 +30,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
                 app.hillforts.add(hillfort.copy())
                 info("Add button pressed: $hillfort")
+
+                setResult(AppCompatActivity.RESULT_OK)
+                finish()
             } else {
                 toast("Please provide a title and description for the Hillfort")
             }
