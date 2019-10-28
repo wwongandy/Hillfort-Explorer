@@ -2,6 +2,8 @@ package org.wit.hillfortexplorer.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -21,21 +23,53 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         app = application as MainApp
         info("Hillfort Activity started..")
 
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
+
+        var edit = false
+        if (intent.hasExtra("hillfort_edit")) {
+            edit = true
+
+            hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
+            hillfortTitle.setText(hillfort.title)
+            description.setText(hillfort.description)
+            btnAdd.setText(R.string.save_hillfort)
+        }
+
         btnAdd.setOnClickListener() {
 
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = description.text.toString()
 
-            if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
+            if (hillfort.title.isEmpty() || hillfort.description.isEmpty()) {
+                toast(R.string.enter_hillfort_title)
+            } else {
 
-                app.hillforts.add(hillfort.copy())
-                info("Add button pressed: $hillfort")
-
+                if (edit) {
+                    app.hillforts.update(hillfort.copy())
+                } else {
+                    app.hillforts.create(hillfort.copy())
+                }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
-            } else {
-                toast("Please provide a title and description for the Hillfort")
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_hillfort, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+            R.id.item_cancel -> { finish() }
+            R.id.item_delete -> {
+                app.hillforts.delete(hillfort)
+                finish()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
