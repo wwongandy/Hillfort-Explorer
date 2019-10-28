@@ -70,6 +70,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
         }
+
+        hillfortLocation.setOnClickListener {
+            info("Set Location pressed")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
