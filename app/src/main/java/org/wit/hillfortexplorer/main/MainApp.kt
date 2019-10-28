@@ -14,7 +14,7 @@ class MainApp : Application(), AnkoLogger {
         super.onCreate()
         info("Hillfort Explorer started")
 
-        hillforts.create(HillfortModel("Hillfort 1", "The first hillfort found"))
-        hillforts.create(HillfortModel("Hillfort 2", "The second hillfort found"))
+        hillforts.create(HillfortModel(9001, "Hillfort 1", "The first hillfort found"))
+        hillforts.create(HillfortModel(9002, "Hillfort 2", "The second hillfort found"))
     }
 }
