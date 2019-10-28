@@ -3,6 +3,7 @@ package org.wit.hillfortexplorer.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,9 +23,17 @@ class HillfortListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
 
+        toolbar.title = title
+        setSupportActionBar(toolbar)
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = HillfortAdapter(app.hillforts)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
 
