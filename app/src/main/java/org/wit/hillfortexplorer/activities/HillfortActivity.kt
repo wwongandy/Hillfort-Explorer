@@ -2,6 +2,7 @@ package org.wit.hillfortexplorer.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -21,6 +22,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         app = application as MainApp
         info("Hillfort Activity started..")
 
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
+
         btnAdd.setOnClickListener() {
 
             hillfort.title = hillfortTitle.text.toString()
@@ -37,5 +41,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 toast("Please provide a title and description for the Hillfort")
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_hillfort, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
