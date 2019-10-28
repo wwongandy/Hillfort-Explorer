@@ -7,4 +7,5 @@
     <string name="menu_cancelHillfort">Cancel</string>
     <string name="enter_hillfort_title">Please provide a title and description for the Hillfort</string>
     <string name="save_hillfort">Save Hillfort</string>
+    <string name="menu_deleteHillfort">Delete</string>
 </resources>
