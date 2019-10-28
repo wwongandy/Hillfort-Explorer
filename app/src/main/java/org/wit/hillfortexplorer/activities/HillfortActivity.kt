@@ -11,6 +11,7 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.helpers.readImage
+import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
@@ -38,6 +39,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
+            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             btnAdd.setText(R.string.save_hillfort)
         }
 
