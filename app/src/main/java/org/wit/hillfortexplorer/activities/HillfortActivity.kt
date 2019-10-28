@@ -12,6 +12,7 @@ import org.wit.hillfortexplorer.models.HillfortModel
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
+    val hillforts = ArrayList<HillfortModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
             hillfort.title = hillfortTitle.text.toString()
             if (hillfort.title.isNotEmpty()) {
-                info("Add button pressed, hillfort title given: $hillfort")
+
+                hillforts.add(hillfort.copy())
+                info("Add button pressed: $hillforts")
             } else {
                 toast("Please enter a Hillfort title")
             }
