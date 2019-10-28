@@ -22,12 +22,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
 
             hillfort.title = hillfortTitle.text.toString()
-            if (hillfort.title.isNotEmpty()) {
+            hillfort.description = description.text.toString()
+
+            if (hillfort.title.isNotEmpty() && hillfort.description.isNotEmpty()) {
 
                 hillforts.add(hillfort.copy())
                 info("Add button pressed: $hillforts")
             } else {
-                toast("Please enter a Hillfort title")
+                toast("Please provide a title and description for the Hillfort")
             }
         }
     }
