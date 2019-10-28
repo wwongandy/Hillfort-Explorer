@@ -10,6 +10,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.helpers.readImage
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
@@ -88,6 +89,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             IMAGE_REQUEST -> {
                 if (data != null) {
                     hillfort.image = data.getData().toString()
+                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                 }
             }
         }
