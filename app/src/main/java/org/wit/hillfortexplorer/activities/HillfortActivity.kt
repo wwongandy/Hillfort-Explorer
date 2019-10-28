@@ -16,6 +16,7 @@ import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
+import org.wit.hillfortexplorer.models.Location
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -73,7 +74,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         hillfortLocation.setOnClickListener {
-            startActivity(intentFor<MapActivity>())
+            val location = Location(52.245696, -7.139102, 15f)
+            startActivity(intentFor<MapActivity>().putExtra("location", location))
         }
     }
 
