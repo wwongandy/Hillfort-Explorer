@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HillfortExplorer</string>
+    <string name="button_addHillfort">Add Hillfort</string>
+    <string name="hint_hillfortTitle">Hillfort Title</string>
 </resources>
