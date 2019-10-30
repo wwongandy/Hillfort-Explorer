@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -49,6 +50,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
 
             btnAdd.setText(R.string.save_hillfort)
+        }
+
+        if (hillfort.images.isEmpty()) {
+            removeImage.visibility = View.GONE
         }
 
         btnAdd.setOnClickListener() {
@@ -115,6 +120,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                     hillfort.images = newImageList
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                     chooseImage.setText(R.string.select_more_images)
+                    removeImage.visibility = View.VISIBLE
 
                     if (hillfort.images.size == 2) {
                         toast("Swipe to view your other images")
