@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import org.wit.hillfortexplorer.R
@@ -24,7 +25,7 @@ class ImagePagerAdapter(private val context: Context, val images: List<String>) 
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val v = layoutInflater!!.inflate(R.layout.image_hillfort, null) as ImageView
+        val v = layoutInflater!!.inflate(R.layout.image_hillfort, null) as RelativeLayout
         val image = v.findViewById<View>(R.id.imageIcon) as ImageView
         image.setImageBitmap(readImageFromPath(context, images[position]))
 

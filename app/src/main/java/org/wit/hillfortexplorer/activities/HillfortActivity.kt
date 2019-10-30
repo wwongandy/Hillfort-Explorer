@@ -42,9 +42,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
-            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
 
-            if (hillfort.image != null) {
+            if (hillfort.image.isNotEmpty()) {
+                hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image[0]))
                 chooseImage.setText(R.string.change_hillfort_image)
             }
 
@@ -109,7 +109,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    hillfort.image = data.getData().toString()
+                    val newImageList = ArrayList(hillfort.image)
+                    newImageList.add(data.getData().toString())
+
+                    hillfort.image = newImageList
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                     chooseImage.setText(R.string.change_hillfort_image)
                 }
