@@ -8,6 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/change_hillfort_image" />
+        android:contentDescription="@string/select_more_images" />
 
 </RelativeLayout>

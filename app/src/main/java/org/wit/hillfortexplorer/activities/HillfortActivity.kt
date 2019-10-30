@@ -45,7 +45,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
             if (hillfort.images.isNotEmpty()) {
                 hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images[0]))
-                chooseImage.setText(R.string.change_hillfort_image)
+                chooseImage.setText(R.string.select_more_images)
             }
 
             btnAdd.setText(R.string.save_hillfort)
@@ -114,7 +114,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
                     hillfort.images = newImageList
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage.setText(R.string.change_hillfort_image)
+                    chooseImage.setText(R.string.select_more_images)
+
+                    if (hillfort.images.size == 2) {
+                        toast("Swipe to view your other images")
+                    }
                 }
             }
 
