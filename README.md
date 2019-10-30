@@ -15,6 +15,6 @@ This mobile app uses the Google Maps API, therefore a Google Maps API key is req
 
 ```xml
 <resources>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAQh2SaKrIJAnwL5Y3cCeK39pdcOIFtrco</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_GOOGLE_MAPS_API_KEY_HERE</string>
 </resources>
 ```
