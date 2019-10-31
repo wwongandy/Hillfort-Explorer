@@ -9,8 +9,9 @@
     <string name="save_hillfort">Save Hillfort</string>
     <string name="menu_deleteHillfort">Delete</string>
     <string name="select_hillfort_image">Select hillfort image</string>
-    <string name="change_hillfort_image">Change hillfort image</string>
+    <string name="select_more_images">Add more images</string>
     <string name="button_addImage">Choose Image</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
+    <string name="button_removeImage">Remove Image</string>
 </resources>

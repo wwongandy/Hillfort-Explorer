@@ -11,21 +11,20 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/imageIcon"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/cardImagePager"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/change_hillfort_image" />
+            android:layout_marginEnd="16dp" />
 
         <TextView
             android:id="@+id/hillfortTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageIcon"
+            android:layout_toEndOf="@+id/cardImagePager"
             android:textSize="30sp" />
 
         <TextView
@@ -33,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hillfortTitle"
-            android:layout_toEndOf="@+id/imageIcon" />
+            android:layout_toEndOf="@+id/cardImagePager" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

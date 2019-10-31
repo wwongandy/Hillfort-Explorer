@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -16,7 +17,10 @@ import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
+import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import org.wit.hillfortexplorer.models.Location
+
+val MAX_HILLFORT_IMAGES_ALLOWED = 4
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -42,13 +46,21 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
-            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
 
-            if (hillfort.image != null) {
-                chooseImage.setText(R.string.change_hillfort_image)
+            if (hillfort.images.isNotEmpty()) {
+                updateImagePager()
+                chooseImage.setText(R.string.select_more_images)
+
+                if (hillfort.images.size > 1) {
+                    toast("Swipe to view your other images")
+                }
             }
 
             btnAdd.setText(R.string.save_hillfort)
+        }
+
+        if (hillfort.images.isEmpty()) {
+            removeImage.visibility = View.GONE
         }
 
         btnAdd.setOnClickListener() {
@@ -72,6 +84,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
+        }
+
+        removeImage.setOnClickListener {
+            val currentImageItem = formImagePager.currentItem
+            val newImageList = ArrayList(hillfort.images)
+
+            newImageList.removeAt(currentImageItem)
+            hillfort.images = newImageList
+            updateImagePager()
         }
 
         hillfortLocation.setOnClickListener {
@@ -109,9 +130,24 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    hillfort.image = data.getData().toString()
-                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage.setText(R.string.change_hillfort_image)
+                    if (hillfort.images.size >= MAX_HILLFORT_IMAGES_ALLOWED) {
+                        toast("You cannot have more than $MAX_HILLFORT_IMAGES_ALLOWED images")
+                    } else {
+                        val newImageList = ArrayList(hillfort.images)
+                        val newImage = data.getData().toString()
+
+                        newImageList.add(newImage)
+                        hillfort.images = newImageList
+
+                        updateImagePager()
+
+                        chooseImage.setText(R.string.select_more_images)
+                        removeImage.visibility = View.VISIBLE
+
+                        if (hillfort.images.size == 2) {
+                            toast("Swipe to view your other images")
+                        }
+                    }
                 }
             }
 
@@ -122,5 +158,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 }
             }
         }
+    }
+
+    private fun updateImagePager() {
+        formImagePager.adapter = ImagePagerAdapter(this, hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
     }
 }
