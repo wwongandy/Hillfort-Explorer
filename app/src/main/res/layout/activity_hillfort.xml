@@ -79,6 +79,13 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <CheckBox
+                    android:id="@+id/isVisited"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/hint_hillfortIsVisited" />
+
                 <Button
                     android:id="@+id/hillfortLocation"
                     android:layout_width="match_parent"
