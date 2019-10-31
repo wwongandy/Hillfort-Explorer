@@ -47,6 +47,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
             additionalNotes.setText(hillfort.additionalNotes)
+            isVisited.isChecked = hillfort.isVisited
 
             if (hillfort.images.isNotEmpty()) {
                 updateImagePager()
@@ -69,6 +70,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = description.text.toString()
             hillfort.additionalNotes = additionalNotes.text.toString()
+            hillfort.isVisited = isVisited.isChecked
 
             if (hillfort.title.isEmpty() || hillfort.description.isEmpty()) {
                 toast(R.string.enter_hillfort_title)
@@ -106,6 +108,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
 
             startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
+        isVisited.setOnClickListener {
+            hillfort.isVisited = isVisited.isChecked
         }
     }
 
