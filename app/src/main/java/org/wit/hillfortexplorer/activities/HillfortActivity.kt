@@ -86,6 +86,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
+        removeImage.setOnClickListener {
+            val currentImageItem = formImagePager.currentItem
+            val newImageList = ArrayList(hillfort.images)
+
+            newImageList.removeAt(currentImageItem)
+            hillfort.images = newImageList
+            updateImagePager()
+        }
+
         hillfortLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
             if (hillfort.location.zoom != 0f) {
