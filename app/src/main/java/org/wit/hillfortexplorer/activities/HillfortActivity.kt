@@ -65,6 +65,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             removeImage.visibility = View.GONE
         }
 
+        if (!hillfort.isVisited) {
+            dateVisited.visibility = View.GONE
+        }
+
         btnAdd.setOnClickListener() {
 
             hillfort.title = hillfortTitle.text.toString()
@@ -112,6 +116,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         isVisited.setOnClickListener {
             hillfort.isVisited = isVisited.isChecked
+
+            if (hillfort.isVisited) {
+                dateVisited.visibility = View.VISIBLE
+            } else {
+                dateVisited.visibility = View.GONE
+            }
         }
     }
 

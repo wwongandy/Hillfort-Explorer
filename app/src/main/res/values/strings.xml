@@ -16,4 +16,5 @@
     <string name="title_activity_map">Map</string>
     <string name="button_removeImage">Remove Image</string>
     <string name="hint_hillfortIsVisited">Visited</string>
+    <string name="button_dateVisited">Set Date Visited</string>
 </resources>
