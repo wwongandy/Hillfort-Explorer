@@ -20,6 +20,8 @@ import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import org.wit.hillfortexplorer.models.Location
 
+val MAX_HILLFORT_IMAGES_ALLOWED = 4
+
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
@@ -119,19 +121,23 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    val newImageList = ArrayList(hillfort.images)
-                    val newImage = data.getData().toString()
+                    if (hillfort.images.size >= MAX_HILLFORT_IMAGES_ALLOWED) {
+                        toast("You cannot have more than $MAX_HILLFORT_IMAGES_ALLOWED images")
+                    } else {
+                        val newImageList = ArrayList(hillfort.images)
+                        val newImage = data.getData().toString()
 
-                    newImageList.add(newImage)
-                    hillfort.images = newImageList
+                        newImageList.add(newImage)
+                        hillfort.images = newImageList
 
-                    updateImagePager()
+                        updateImagePager()
 
-                    chooseImage.setText(R.string.select_more_images)
-                    removeImage.visibility = View.VISIBLE
+                        chooseImage.setText(R.string.select_more_images)
+                        removeImage.visibility = View.VISIBLE
 
-                    if (hillfort.images.size == 2) {
-                        toast("Swipe to view your other images")
+                        if (hillfort.images.size == 2) {
+                            toast("Swipe to view your other images")
+                        }
                     }
                 }
             }
