@@ -17,6 +17,7 @@ import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
+import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import org.wit.hillfortexplorer.models.Location
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -45,8 +46,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             description.setText(hillfort.description)
 
             if (hillfort.images.isNotEmpty()) {
-                hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.images[0]))
+                updateImagePager()
                 chooseImage.setText(R.string.select_more_images)
+
+                if (hillfort.images.size > 1) {
+                    toast("Swipe to view your other images")
+                }
             }
 
             btnAdd.setText(R.string.save_hillfort)
@@ -115,10 +120,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             IMAGE_REQUEST -> {
                 if (data != null) {
                     val newImageList = ArrayList(hillfort.images)
-                    newImageList.add(data.getData().toString())
+                    val newImage = data.getData().toString()
 
+                    newImageList.add(newImage)
                     hillfort.images = newImageList
-                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+
+                    updateImagePager()
+
                     chooseImage.setText(R.string.select_more_images)
                     removeImage.visibility = View.VISIBLE
 
@@ -135,5 +143,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 }
             }
         }
+    }
+
+    private fun updateImagePager() {
+        formImagePager.adapter = ImagePagerAdapter(this, hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
     }
 }

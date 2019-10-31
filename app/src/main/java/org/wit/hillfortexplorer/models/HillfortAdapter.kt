@@ -39,7 +39,7 @@ class HillfortAdapter constructor(
         fun bind(hillfort: HillfortModel, listener: HillfortListener) {
             itemView.hillfortTitle.text = hillfort.title
             itemView.description.text = hillfort.description
-            itemView.cardImagePager.adapter = ImagePagerAdapter(itemView.context, hillfort.images, R.layout.image_hillfort, R.id.cardImageIcon)
+            itemView.cardImagePager.adapter = ImagePagerAdapter(itemView.context, hillfort.images, R.layout.card_image_hillfort, R.id.cardImageIcon)
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
         }
     }

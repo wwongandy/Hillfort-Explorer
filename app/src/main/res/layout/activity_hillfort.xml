@@ -96,8 +96,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
 
-                    <ImageView
-                        android:id="@+id/hillfortImage"
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/formImagePager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="39dp"
@@ -105,8 +105,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_launcher" />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
