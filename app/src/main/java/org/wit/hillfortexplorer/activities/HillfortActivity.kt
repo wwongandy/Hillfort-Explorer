@@ -46,6 +46,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             description.setText(hillfort.description)
+            additionalNotes.setText(hillfort.additionalNotes)
 
             if (hillfort.images.isNotEmpty()) {
                 updateImagePager()
@@ -67,6 +68,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = description.text.toString()
+            hillfort.additionalNotes = additionalNotes.text.toString()
 
             if (hillfort.title.isEmpty() || hillfort.description.isEmpty()) {
                 toast(R.string.enter_hillfort_title)
