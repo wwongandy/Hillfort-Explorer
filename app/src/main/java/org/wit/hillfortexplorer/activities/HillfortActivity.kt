@@ -1,5 +1,6 @@
 package org.wit.hillfortexplorer.activities
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,13 +13,13 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
-import org.wit.hillfortexplorer.helpers.readImage
-import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import org.wit.hillfortexplorer.models.Location
+import java.util.*
+import kotlin.collections.ArrayList
 
 val MAX_HILLFORT_IMAGES_ALLOWED = 4
 
@@ -121,6 +122,32 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 dateVisited.visibility = View.VISIBLE
             } else {
                 dateVisited.visibility = View.GONE
+            }
+        }
+
+        // Setting up date picker dialog
+        val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+
+        dateVisited.setOnClickListener {
+            // Date picker dialog
+            val datePicker = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener {datePicker, choseYear, choseMonth, choseDay ->
+                    val parsedDate = Date(choseYear, choseMonth, choseDay)
+                    hillfort.dateVisited = parsedDate
+                },
+                year,
+                month,
+                day
+            )
+
+            datePicker.show()
+
+            if (hillfort.dateVisited != null) {
+                toast("Date visited: ${hillfort.dateVisited}")
             }
         }
     }
