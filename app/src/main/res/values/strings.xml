@@ -3,6 +3,7 @@
     <string name="button_addHillfort">Add Hillfort</string>
     <string name="hint_hillfortTitle">Hillfort Title</string>
     <string name="hint_hillfortDescription">Description</string>
+    <string name="hint_hillfortAdditionalNotes">Additional notes</string>
     <string name="menu_addHillfort">Add</string>
     <string name="menu_cancelHillfort">Cancel</string>
     <string name="enter_hillfort_title">Please provide a title and description for the Hillfort</string>
@@ -14,4 +15,6 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
     <string name="button_removeImage">Remove Image</string>
+    <string name="hint_hillfortIsVisited">Visited</string>
+    <string name="button_dateVisited">Set Date Visited</string>
 </resources>
