@@ -21,4 +21,6 @@
     <string name="hint_password">Password</string>
     <string name="button_register">Register User</string>
     <string name="button_login">Login as User</string>
+    <string name="enter_user_pass">Please provide a username and password for your user</string>
+    <string name="valid_registration">User registered</string>
 </resources>
