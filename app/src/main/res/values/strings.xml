@@ -17,4 +17,8 @@
     <string name="button_removeImage">Remove Image</string>
     <string name="hint_hillfortIsVisited">Visited</string>
     <string name="button_dateVisited">Set Date Visited</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="button_register">Register User</string>
+    <string name="button_login">Login as User</string>
 </resources>
