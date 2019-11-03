@@ -45,7 +45,7 @@ class UserJSONStore: UserStore, AnkoLogger {
     }
 
     override fun authenticate(username: String, password: String): Boolean {
-        var foundUser: UserModel ?= users.find { u -> u.username == username && u.password = password }
+        var foundUser: UserModel ?= users.find { u -> u.username == username && u.password == password }
         return foundUser != null
     }
 
