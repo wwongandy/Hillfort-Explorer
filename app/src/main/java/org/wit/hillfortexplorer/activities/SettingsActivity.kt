@@ -24,9 +24,9 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarSettings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val _username = app.currentUser.username
-        val _password = app.currentUser.password
         changeUsername.setOnClickListener {
+            val _username = app.currentUser.username
+            val _password = app.currentUser.password
             val oldUsername = oldUsername.text.toString()
             val newUsername = newUsername.text.toString()
 
@@ -35,11 +35,16 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
             } else if (newUsername.isEmpty()) {
                 toast(R.string.invalid_newUsername)
             } else {
+                app.users.changeUsername(_username, _password, newUsername)
+                app.currentUser = app.users.authenticate(newUsername, _password)
+
                 toast(R.string.valid_changeUsername)
             }
         }
 
         changePassword.setOnClickListener {
+            val _username = app.currentUser.username
+            val _password = app.currentUser.password
             val oldPassword = oldPassword.text.toString()
             val newPassword = newPassword.text.toString()
 
@@ -48,6 +53,9 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
             } else if (newPassword.isEmpty()) {
                 toast(R.string.invalid_newPassword)
             } else {
+                app.users.changePassword(_username, _password, newPassword)
+                app.currentUser = app.users.authenticate(_username, newPassword)
+
                 toast(R.string.valid_changePassword)
             }
         }
