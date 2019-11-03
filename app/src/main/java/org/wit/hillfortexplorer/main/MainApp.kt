@@ -7,6 +7,7 @@ import org.wit.hillfortexplorer.models.*
 
 class MainApp : Application(), AnkoLogger {
 
+    lateinit var currentUser: UserModel
     lateinit var users: UserStore
     lateinit var hillforts: HillfortStore
 

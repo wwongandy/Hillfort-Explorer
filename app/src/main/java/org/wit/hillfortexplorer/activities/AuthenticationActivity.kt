@@ -41,9 +41,9 @@ class AuthenticationActivity: AppCompatActivity(), AnkoLogger {
             val username = username.text.toString()
             val password = password.text.toString()
 
-            val validLogin = app.users.authenticate(username, password)
-            if (validLogin) {
-                startActivity(intentFor<HillfortListActivity>().putExtra("session", app.users.session(username)))
+            app.currentUser = app.users.authenticate(username, password)
+            if (app.currentUser.username.isNotEmpty()) {
+                startActivity(intentFor<HillfortListActivity>())
             } else {
                 toast(R.string.invalid_login)
             }
