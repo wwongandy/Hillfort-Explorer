@@ -56,7 +56,7 @@ class UserJSONStore: UserStore, AnkoLogger {
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(users, usersListType)
-        write(context, JSON_FILE_HILLFORTS, jsonString)
+        write(context, JSON_FILE_USERS, jsonString)
     }
 
     private fun deserialize() {
