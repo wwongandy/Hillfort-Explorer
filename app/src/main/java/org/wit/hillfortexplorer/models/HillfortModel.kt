@@ -7,6 +7,7 @@ import kotlin.collections.ArrayList
 
 @Parcelize
 data class HillfortModel(
+    var userId: Long = 0,
     var id: Long = 0,
     var title: String = "",
     var description: String = "",

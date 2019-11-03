@@ -29,11 +29,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
         toolbar.title = title
         setSupportActionBar(toolbar)
 
-        if (intent.hasExtra("session")) {
-            val user = intent.extras?.getParcelable<UserModel>("session")!!
-            toast("Logged in as ${user.username}")
-        }
-
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         loadHillforts()
@@ -63,7 +58,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     }
 
     private fun loadHillforts() {
-        showHillforts(app.hillforts.findAll())
+        showHillforts(app.hillforts.findAll(app.currentUser.id))
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {
