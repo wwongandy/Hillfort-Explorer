@@ -26,4 +26,10 @@
     <string name="invalid_login">Cannot login. Invalid username or password.</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_logout">Logout</string>
+    <string name="hint_oldUsername">Current username</string>
+    <string name="hint_newUsername">New username</string>
+    <string name="button_changeUsername">Change Username</string>
+    <string name="hint_oldPassword">Current password</string>
+    <string name="hint_newPassword">New password</string>
+    <string name="button_changePassword">Change Password</string>
 </resources>
