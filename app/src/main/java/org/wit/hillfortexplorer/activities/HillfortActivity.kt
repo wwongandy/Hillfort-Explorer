@@ -101,6 +101,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
             newImageList.removeAt(currentImageItem)
             hillfort.images = newImageList
+
+            if (hillfort.images.isEmpty()) {
+                removeImage.visibility = View.GONE
+            }
+
             updateImagePager()
         }
 
@@ -183,7 +188,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
                         newImageList.add(newImage)
                         hillfort.images = newImageList
-
                         updateImagePager()
 
                         chooseImage.setText(R.string.select_more_images)
