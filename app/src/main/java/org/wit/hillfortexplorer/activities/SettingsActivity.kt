@@ -29,8 +29,7 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
             "Total number of hillforts: ${statistics.totalNumberOfHillforts}\n" +
             "Number of hillforts visited: ${statistics.visitedHillforts}\n" +
             "Visited this year: ${statistics.visitedThisYear}\n" +
-            "Visited this month: ${statistics.visitedThisMonth}\n" +
-            "Created hillforts: ${statistics.createdHillforts}"
+            "Visited this month: ${statistics.visitedThisMonth}"
         )
 
         changeUsername.setOnClickListener {
