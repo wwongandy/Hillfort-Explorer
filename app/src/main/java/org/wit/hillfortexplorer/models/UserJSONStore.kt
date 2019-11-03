@@ -54,6 +54,20 @@ class UserJSONStore: UserStore, AnkoLogger {
         }
     }
 
+    override fun changeUsername(username: String, password: String, newUsername: String) {
+        var foundUser: UserModel ?= users.find { u -> u.username == username && u.password == password }
+        foundUser?.username = newUsername
+
+        serialize()
+    }
+
+    override fun changePassword(username: String, password: String, newPassword: String) {
+        var foundUser: UserModel ?= users.find { u -> u.username == username && u.password == password }
+        foundUser?.password = newPassword
+
+        serialize()
+    }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(users, usersListType)
         write(context, JSON_FILE_USERS, jsonString)
