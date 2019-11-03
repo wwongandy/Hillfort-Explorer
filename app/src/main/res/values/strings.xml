@@ -25,4 +25,6 @@
     <string name="valid_registration">User registered</string>
     <string name="invalid_registration">User not registered. Username already exists in database</string>
     <string name="invalid_login">Cannot login. Invalid username or password.</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_logout">Logout</string>
 </resources>
