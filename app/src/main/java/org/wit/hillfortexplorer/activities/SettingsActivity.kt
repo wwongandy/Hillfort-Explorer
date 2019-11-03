@@ -24,6 +24,15 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarSettings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val statistics = app.hillforts.getUserStatistics(app.currentUser.id)
+        statsView.setText(
+            "Total number of hillforts: ${statistics.totalNumberOfHillforts}\n" +
+            "Number of hillforts visited: ${statistics.visitedHillforts}\n" +
+            "Visited this year: ${statistics.visitedThisYear}\n" +
+            "Visited this month: ${statistics.visitedThisMonth}\n" +
+            "Created hillforts: ${statistics.createdHillforts}"
+        )
+
         changeUsername.setOnClickListener {
             val _username = app.currentUser.username
             val _password = app.currentUser.password
