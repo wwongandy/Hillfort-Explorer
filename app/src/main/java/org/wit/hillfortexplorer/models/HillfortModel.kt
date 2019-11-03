@@ -24,3 +24,12 @@ data class Location(
     var lng: Double = 0.0,
     var zoom: Float = 0f
 ) : Parcelable
+
+@Parcelize
+data class HillfortUserStats(
+    var totalNumberOfHillforts: Int = 0,
+    var visitedHillforts: Int = 0,
+    var visitedThisYear: Int = 0,
+    var visitedThisMonth: Int = 0,
+    var createdHillforts: Int = 0
+) : Parcelable

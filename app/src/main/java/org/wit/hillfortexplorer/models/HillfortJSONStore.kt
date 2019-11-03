@@ -70,6 +70,22 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         serialize()
     }
 
+    override fun getUserStatistics(userId: Long): HillfortUserStats {
+        val stats = HillfortUserStats()
+        val userHillforts = findAll(userId)
+
+        val thisYear = Calendar.getInstance().get(Calendar.YEAR)
+        val thisMonth = Calendar.getInstance().get(Calendar.MONTH)
+
+        stats.totalNumberOfHillforts = userHillforts.size
+        stats.visitedHillforts = userHillforts.count { p -> p.isVisited }
+        stats.visitedThisYear = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear }
+        stats.visitedThisMonth = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear && p.dateVisited?.month == thisMonth }
+        // TODO: stats.createdHillforts = 0
+
+        return stats
+    }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(hillforts, hillfortsListType)
         write(context, JSON_FILE_HILLFORTS, jsonString)
