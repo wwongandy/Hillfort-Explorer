@@ -19,15 +19,23 @@
 
         <activity
             android:name=".activities.MapActivity"
-            android:label="@string/title_activity_map"></activity>
-        <activity android:name=".activities.HillfortActivity"></activity>
+            android:label="@string/title_activity_map">
+        </activity>
+
+        <activity android:name=".activities.HillfortActivity">
+        </activity>
+
         <activity android:name=".activities.HillfortListActivity">
+        </activity>
+
+        <activity android:name=".activities.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

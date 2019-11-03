@@ -8,9 +8,9 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.hillfortexplorer.helpers.*
 import java.util.*
 
-val JSON_FILE = "hillforts.json"
+val JSON_FILE_HILLFORTS = "hillforts.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
-val listType = object : TypeToken<java.util.ArrayList<HillfortModel>>(){}.type
+val hillfortsListType = object : TypeToken<java.util.ArrayList<HillfortModel>>(){}.type
 
 fun generateRandomId(): Long {
     return Random().nextLong()
@@ -24,7 +24,7 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
     constructor(context: Context) {
         this.context = context
 
-        if (exists(context, JSON_FILE)) {
+        if (exists(context, JSON_FILE_HILLFORTS)) {
             deserialize()
         }
     }
@@ -61,12 +61,12 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
     }
 
     private fun serialize() {
-        val jsonString = gsonBuilder.toJson(hillforts, listType)
-        write(context, JSON_FILE, jsonString)
+        val jsonString = gsonBuilder.toJson(hillforts, hillfortsListType)
+        write(context, JSON_FILE_HILLFORTS, jsonString)
     }
 
     private fun deserialize() {
-        val jsonString = read(context, JSON_FILE)
-        hillforts = Gson().fromJson(jsonString, listType)
+        val jsonString = read(context, JSON_FILE_HILLFORTS)
+        hillforts = Gson().fromJson(jsonString, hillfortsListType)
     }
 }

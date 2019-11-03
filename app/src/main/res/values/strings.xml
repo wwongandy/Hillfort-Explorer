@@ -17,4 +17,11 @@
     <string name="button_removeImage">Remove Image</string>
     <string name="hint_hillfortIsVisited">Visited</string>
     <string name="button_dateVisited">Set Date Visited</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="button_register">Register User</string>
+    <string name="button_login">Login as User</string>
+    <string name="enter_user_pass">Please provide a username and password for your user</string>
+    <string name="valid_registration">User registered</string>
+    <string name="invalid_registration">User not registered. Username already exists in database</string>
 </resources>
