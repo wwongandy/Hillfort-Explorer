@@ -81,7 +81,6 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         stats.visitedHillforts = userHillforts.count { p -> p.isVisited }
         stats.visitedThisYear = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear }
         stats.visitedThisMonth = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear && p.dateVisited?.month == thisMonth }
-        // TODO: stats.createdHillforts = 0
 
         return stats
     }
