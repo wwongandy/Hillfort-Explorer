@@ -63,6 +63,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         if (hillfort.images.isEmpty()) {
+            imageLayout.visibility = View.GONE
             removeImage.visibility = View.GONE
         }
 
@@ -103,10 +104,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.images = newImageList
 
             if (hillfort.images.isEmpty()) {
+                imageLayout.visibility = View.GONE
                 removeImage.visibility = View.GONE
+            } else {
+                updateImagePager()
             }
 
-            updateImagePager()
         }
 
         hillfortLocation.setOnClickListener {
@@ -188,6 +191,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
                         newImageList.add(newImage)
                         hillfort.images = newImageList
+                        imageLayout.visibility = View.VISIBLE
                         updateImagePager()
 
                         chooseImage.setText(R.string.select_more_images)
