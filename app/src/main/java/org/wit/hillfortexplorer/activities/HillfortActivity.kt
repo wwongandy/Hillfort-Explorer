@@ -39,6 +39,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         var edit = false
         if (intent.hasExtra("hillfort_edit")) {
@@ -167,7 +168,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
-            R.id.item_cancel -> { finish() }
             R.id.item_delete -> {
                 app.hillforts.delete(hillfort)
                 finish()
