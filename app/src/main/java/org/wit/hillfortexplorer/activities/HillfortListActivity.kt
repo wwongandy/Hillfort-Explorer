@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortAdapter
 import org.wit.hillfortexplorer.models.HillfortListener
 import org.wit.hillfortexplorer.models.HillfortModel
+import org.wit.hillfortexplorer.models.UserModel
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
@@ -25,6 +27,11 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
         toolbar.title = title
         setSupportActionBar(toolbar)
+
+        if (intent.hasExtra("session")) {
+            val user = intent.extras?.getParcelable<UserModel>("session")!!
+            toast("Logged in as ${user.username}")
+        }
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
