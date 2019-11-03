@@ -16,6 +16,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:fitsSystemWindows="true"
+                app:elevation="0dip"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbarSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:titleTextColor="@color/colorPrimary" />
+            </com.google.android.material.appbar.AppBarLayout>
+
             <EditText
                 android:id="@+id/oldUsername"
                 android:layout_width="match_parent"
