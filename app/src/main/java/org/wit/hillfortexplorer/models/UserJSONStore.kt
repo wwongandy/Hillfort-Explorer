@@ -44,14 +44,28 @@ class UserJSONStore: UserStore, AnkoLogger {
         return true
     }
 
-    override fun authenticate(username: String, password: String): Boolean {
+    override fun authenticate(username: String, password: String): UserModel {
         var foundUser: UserModel ?= users.find { u -> u.username == username && u.password == password }
-        return foundUser != null
+
+        if (foundUser == null) {
+            return UserModel()
+        } else {
+            return foundUser
+        }
     }
 
-    override fun session(username: String): UserModel? {
-        var foundUser: UserModel ?= users.find { u -> u.username == username }
-        return foundUser
+    override fun changeUsername(username: String, password: String, newUsername: String) {
+        var foundUser: UserModel ?= users.find { u -> u.username == username && u.password == password }
+        foundUser?.username = newUsername
+
+        serialize()
+    }
+
+    override fun changePassword(username: String, password: String, newPassword: String) {
+        var foundUser: UserModel ?= users.find { u -> u.username == username && u.password == password }
+        foundUser?.password = newPassword
+
+        serialize()
     }
 
     private fun serialize() {
