@@ -24,4 +24,5 @@
     <string name="enter_user_pass">Please provide a username and password for your user</string>
     <string name="valid_registration">User registered</string>
     <string name="invalid_registration">User not registered. Username already exists in database</string>
+    <string name="invalid_login">Cannot login. Invalid username or password.</string>
 </resources>
