@@ -24,7 +24,13 @@ class AuthenticationActivity: AppCompatActivity(), AnkoLogger {
             val password = password.text.toString()
 
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                toast(R.string.valid_registration)
+                val validRegistration = app.users.register(username, password)
+
+                if (validRegistration) {
+                    toast(R.string.valid_registration)
+                } else {
+                    toast(R.string.invalid_registration)
+                }
             } else {
                 toast(R.string.enter_user_pass)
             }
