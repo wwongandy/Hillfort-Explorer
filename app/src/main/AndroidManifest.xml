@@ -20,6 +20,9 @@
         <activity
             android:name=".activities.MapActivity"
             android:label="@string/title_activity_map">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HillfortActivity" />
         </activity>
 
         <activity android:name=".activities.HillfortActivity">
