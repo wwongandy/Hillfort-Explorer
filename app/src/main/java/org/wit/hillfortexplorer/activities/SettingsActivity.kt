@@ -34,6 +34,8 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
                 toast(R.string.invalid_oldUsername)
             } else if (newUsername.isEmpty()) {
                 toast(R.string.invalid_newUsername)
+            } else if (!app.users.ensureUniqueCredentials(newUsername, _password)) {
+                toast(R.string.duplicate_newUsername)
             } else {
                 app.users.changeUsername(_username, _password, newUsername)
                 app.currentUser = app.users.authenticate(newUsername, _password)

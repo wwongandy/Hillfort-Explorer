@@ -38,4 +38,5 @@
     <string name="valid_changePassword">Password changed</string>
     <string name="invalid_newUsername">Please provide a new username to change to</string>
     <string name="invalid_newPassword">Please provide a new password to change to</string>
+    <string name="duplicate_newUsername">Username already exists in database</string>
 </resources>
