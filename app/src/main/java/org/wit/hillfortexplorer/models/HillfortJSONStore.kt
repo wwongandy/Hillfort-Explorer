@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.wit.hillfortexplorer.helpers.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 val JSON_FILE_HILLFORTS = "hillforts.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
@@ -29,18 +30,26 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         }
     }
 
-    override fun findAll(): List<HillfortModel> {
-        return hillforts
+    override fun findAll(userId: Long): List<HillfortModel> {
+        var userHillforts = ArrayList<HillfortModel>()
+
+        hillforts.forEach {
+            p -> p.userId == userId && userHillforts.add(p)
+        }
+
+        return userHillforts
     }
 
-    override fun create(hillfort: HillfortModel) {
+    override fun create(hillfort: HillfortModel, userId: Long) {
+        hillfort.userId = userId
         hillfort.id = generateRandomId()
         hillforts.add(hillfort)
+
         serialize()
     }
 
-    override fun update(hillfort: HillfortModel) {
-        var foundHillfort: HillfortModel ?= hillforts.find { p -> p.id == hillfort.id }
+    override fun update(hillfort: HillfortModel, userId: Long) {
+        var foundHillfort: HillfortModel ?= hillforts.find { p -> p.id == hillfort.id && p.userId == userId }
 
         if (foundHillfort != null) {
             foundHillfort.title = hillfort.title
@@ -57,7 +66,23 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
 
     override fun delete(hillfort: HillfortModel) {
         hillforts.remove(hillfort)
+
         serialize()
+    }
+
+    override fun getUserStatistics(userId: Long): HillfortUserStats {
+        val stats = HillfortUserStats()
+        val userHillforts = findAll(userId)
+
+        val thisYear = Calendar.getInstance().get(Calendar.YEAR)
+        val thisMonth = Calendar.getInstance().get(Calendar.MONTH)
+
+        stats.totalNumberOfHillforts = userHillforts.size
+        stats.visitedHillforts = userHillforts.count { p -> p.isVisited }
+        stats.visitedThisYear = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear }
+        stats.visitedThisMonth = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear && p.dateVisited?.month == thisMonth }
+
+        return stats
     }
 
     private fun serialize() {

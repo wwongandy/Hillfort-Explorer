@@ -24,6 +24,14 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarSettings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val statistics = app.hillforts.getUserStatistics(app.currentUser.id)
+        statsView.setText(
+            "Total number of hillforts: ${statistics.totalNumberOfHillforts}\n" +
+            "Number of hillforts visited: ${statistics.visitedHillforts}\n" +
+            "Visited this year: ${statistics.visitedThisYear}\n" +
+            "Visited this month: ${statistics.visitedThisMonth}"
+        )
+
         changeUsername.setOnClickListener {
             val _username = app.currentUser.username
             val _password = app.currentUser.password
@@ -34,6 +42,8 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
                 toast(R.string.invalid_oldUsername)
             } else if (newUsername.isEmpty()) {
                 toast(R.string.invalid_newUsername)
+            } else if (!app.users.ensureUniqueCredentials(newUsername, _password)) {
+                toast(R.string.duplicate_newUsername)
             } else {
                 app.users.changeUsername(_username, _password, newUsername)
                 app.currentUser = app.users.authenticate(newUsername, _password)

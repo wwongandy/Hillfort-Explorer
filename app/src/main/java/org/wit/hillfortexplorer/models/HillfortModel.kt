@@ -7,6 +7,7 @@ import kotlin.collections.ArrayList
 
 @Parcelize
 data class HillfortModel(
+    var userId: Long = 0,
     var id: Long = 0,
     var title: String = "",
     var description: String = "",
@@ -22,4 +23,12 @@ data class Location(
     var lat: Double = 0.0,
     var lng: Double = 0.0,
     var zoom: Float = 0f
+) : Parcelable
+
+@Parcelize
+data class HillfortUserStats(
+    var totalNumberOfHillforts: Int = 0,
+    var visitedHillforts: Int = 0,
+    var visitedThisYear: Int = 0,
+    var visitedThisMonth: Int = 0
 ) : Parcelable

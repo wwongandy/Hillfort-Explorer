@@ -84,9 +84,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             } else {
 
                 if (edit) {
-                    app.hillforts.update(hillfort.copy())
+                    app.hillforts.update(hillfort.copy(), app.currentUser.id)
                 } else {
-                    app.hillforts.create(hillfort.copy())
+                    app.hillforts.create(hillfort.copy(), app.currentUser.id)
                 }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
