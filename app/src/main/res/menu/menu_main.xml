@@ -8,6 +8,11 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/item_map"
+        android:title="@string/menu_mapOfHillforts"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/item_settings"
         android:title="@string/menu_settings"
         app:showAsAction="always" />
