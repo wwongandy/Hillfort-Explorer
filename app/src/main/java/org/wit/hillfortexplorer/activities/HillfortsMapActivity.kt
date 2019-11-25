@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
 import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.main.MainApp
+import org.wit.hillfortexplorer.models.ImagePagerAdapter
 
 class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -55,7 +56,7 @@ class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
 
         currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort!!.description
-        // currentImage.setImageBitmap(readImageFromPath(this, hillfort.images.get(0)))
+        mapsImagePager.adapter = ImagePagerAdapter(this, hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
 
         return true
     }

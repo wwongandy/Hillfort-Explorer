@@ -37,34 +37,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/currentImage"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/mapsImagePager"
                 android:layout_width="121dp"
                 android:layout_height="98dp"
-                android:contentDescription="@string/hillfort_image_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.931"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.482"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintVertical_bias="0.482" />
 
             <TextView
                 android:id="@+id/currentTitle"
                 android:layout_width="175dp"
                 android:layout_height="21dp"
+                android:layout_marginStart="24dp"
                 android:text="@string/hillfort_title_placeholder"
                 app:layout_constraintBottom_toTopOf="@+id/currentDescription"
                 app:layout_constraintEnd_toStartOf="@+id/currentImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.722" />
+                app:layout_constraintVertical_bias="0.787" />
 
             <TextView
                 android:id="@+id/currentDescription"
                 android:layout_width="173dp"
                 android:layout_height="48dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/hillfort_description_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
