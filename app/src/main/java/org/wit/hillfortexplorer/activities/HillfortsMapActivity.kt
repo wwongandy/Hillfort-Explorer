@@ -27,6 +27,8 @@ class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
         toolbar.title = title
         setSupportActionBar(toolbar)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         app = application as MainApp
 
         mapView.onCreate(savedInstanceState)

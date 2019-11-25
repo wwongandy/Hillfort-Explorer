@@ -15,7 +15,12 @@
         <activity
             android:name=".activities.HillfortsMapActivity"
             android:label="@string/title_activity_hillforts_map"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HillfortListActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
