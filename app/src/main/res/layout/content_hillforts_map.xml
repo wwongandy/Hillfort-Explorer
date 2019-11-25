@@ -41,12 +41,14 @@
                 android:id="@+id/currentImage"
                 android:layout_width="121dp"
                 android:layout_height="98dp"
+                android:contentDescription="@string/hillfort_image_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.931"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
-                android:contentDescription="@string/hillfort_image_placeholder" />
+                app:layout_constraintVertical_bias="0.482"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
                 android:id="@+id/currentTitle"
