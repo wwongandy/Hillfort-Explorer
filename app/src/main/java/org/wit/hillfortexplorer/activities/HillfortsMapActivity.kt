@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortexplorer.R
 
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
 import org.wit.hillfortexplorer.main.MainApp
 
-class HillfortsMapActivity : AppCompatActivity() {
+class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     lateinit var app: MainApp
     lateinit var map: GoogleMap
@@ -43,6 +44,13 @@ class HillfortsMapActivity : AppCompatActivity() {
             // Move camera to most recent hillfort
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
+
+        map.setOnMarkerClickListener(this)
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        currentTitle.text = marker.title
+        return false
     }
 
     override fun onDestroy() {

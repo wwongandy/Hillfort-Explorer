@@ -44,4 +44,7 @@
     <string name="hint_statistics">Statistics to be displayed here</string>
     <string name="menu_mapOfHillforts">Map</string>
     <string name="title_activity_hillforts_map">Map of Hillforts</string>
+    <string name="hillfort_image_placeholder">No image of Hillfort found</string>
+    <string name="hillfort_title_placeholder">Hillfort name</string>
+    <string name="hillfort_description_placeholder">Hillfort description</string>
 </resources>
