@@ -16,7 +16,7 @@
             android:name=".activities.HillfortsMapActivity"
             android:label="@string/title_activity_hillforts_map"
             android:theme="@style/AppTheme.NoActionBar">
-            
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HillfortListActivity" />
