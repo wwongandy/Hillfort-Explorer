@@ -43,4 +43,5 @@
     <string name="title_statistics">User Statistics</string>
     <string name="hint_statistics">Statistics to be displayed here</string>
     <string name="menu_mapOfHillforts">Map</string>
+    <string name="title_activity_hillforts_map">Map of Hillforts</string>
 </resources>

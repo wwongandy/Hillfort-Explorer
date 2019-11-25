@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.HillfortsMapActivity"
+            android:label="@string/title_activity_hillforts_map"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -24,25 +28,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HillfortActivity" />
         </activity>
-
         <activity android:name=".activities.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HillfortListActivity" />
         </activity>
-
         <activity android:name=".activities.HillfortActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HillfortListActivity" />
         </activity>
-
-        <activity android:name=".activities.HillfortListActivity">
-        </activity>
-
-        <activity android:name=".activities.AuthenticationActivity">
-        </activity>
-
+        <activity android:name=".activities.HillfortListActivity"></activity>
+        <activity android:name=".activities.AuthenticationActivity"></activity>
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
