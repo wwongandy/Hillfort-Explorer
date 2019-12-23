@@ -7,31 +7,26 @@ import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
-import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
-import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortAdapter
 import org.wit.hillfortexplorer.models.HillfortListener
 import org.wit.hillfortexplorer.models.HillfortModel
-import org.wit.hillfortexplorer.models.UserModel
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
-    lateinit var app: MainApp
+    lateinit var presenter: HillfortListPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
-        app = application as MainApp
+        presenter = HillfortListPresenter(this)
 
         toolbar.title = title
         setSupportActionBar(toolbar)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        loadHillforts()
+        presenter.loadHillforts()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -40,26 +35,17 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<HillfortActivity>(0)
-            R.id.item_map -> startActivity<HillfortsMapActivity>()
-            R.id.item_settings -> startActivity<SettingsActivity>()
-            R.id.item_logout -> startActivity<AuthenticationActivity>()
-        }
+        presenter.doOptionsItemSelected(item)
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        presenter.doActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
         startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loadHillforts()
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun loadHillforts() {
-        showHillforts(app.hillforts.findAll(app.currentUser.id))
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {
