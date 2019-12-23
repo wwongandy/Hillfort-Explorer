@@ -18,18 +18,17 @@ import org.wit.hillfortexplorer.models.ImagePagerAdapter
 
 class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
-    lateinit var app: MainApp
+    lateinit var presenter: HillfortsMapPresenter
     lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillforts_map)
+        presenter = HillfortsMapPresenter(this)
+
         toolbar.title = title
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        app = application as MainApp
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
@@ -40,12 +39,13 @@ class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
 
     fun configureMap() {
         map.uiSettings.isZoomControlsEnabled = true
-        app.hillforts.findAll(app.currentUser.id).forEach {
+
+        presenter.doLoadHillforts().forEach {
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options).tag = it.id
 
-            // Move camera to most recent hillfort
+            // Move camera to most recent Hillfort
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
 
@@ -54,7 +54,7 @@ class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val tag = marker.tag as Long
-        val hillfort = app.hillforts.findById(tag)
+        val hillfort = presenter.doGetHillfort(tag)
 
         currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort!!.description
