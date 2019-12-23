@@ -1,10 +1,11 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.authentication
 
 import kotlinx.android.synthetic.main.activity_authentication.*
 import org.jetbrains.anko.intentFor
+import org.wit.hillfortexplorer.views.hillfortlist.HillfortListActivity
 import org.wit.hillfortexplorer.main.MainApp
 
-class AuthenticationPresenter(val view: AuthenticationActivity) {
+class AuthenticationPresenter(val view: AuthenticationView) {
 
     var app : MainApp
 

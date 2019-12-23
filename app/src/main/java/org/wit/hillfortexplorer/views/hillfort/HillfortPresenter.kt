@@ -1,4 +1,4 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.hillfort
 
 import android.content.Intent
 import android.view.MenuItem
@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.intentFor
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.views.editlocation.EditLocationView
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.Location
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HillfortPresenter(val view: HillfortActivity) {
+class HillfortPresenter(val view: HillfortView) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
@@ -66,7 +67,7 @@ class HillfortPresenter(val view: HillfortActivity) {
             location.zoom = hillfort.location.zoom
         }
 
-        view.startActivityForResult(view.intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+        view.startActivityForResult(view.intentFor<EditLocationView>().putExtra("location", location), LOCATION_REQUEST)
     }
 
     fun doUpdateVisitedFlag() {

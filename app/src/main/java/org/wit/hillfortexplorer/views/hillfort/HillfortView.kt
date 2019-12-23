@@ -1,4 +1,4 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.hillfort
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -16,7 +16,7 @@ import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import java.util.*
 
-class HillfortActivity : AppCompatActivity(), AnkoLogger {
+class HillfortView : AppCompatActivity(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
 

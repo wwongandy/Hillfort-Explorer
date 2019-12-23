@@ -1,4 +1,4 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.hillfortlist
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.views.hillfort.HillfortView
 import org.wit.hillfortexplorer.models.HillfortAdapter
 import org.wit.hillfortexplorer.models.HillfortListener
 import org.wit.hillfortexplorer.models.HillfortModel
@@ -45,7 +46,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
-        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+        startActivityForResult(intentFor<HillfortView>().putExtra("hillfort_edit", hillfort), 0)
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {

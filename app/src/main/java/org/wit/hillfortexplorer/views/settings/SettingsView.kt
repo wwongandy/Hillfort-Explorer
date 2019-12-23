@@ -1,4 +1,4 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.settings
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,7 +9,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
 
-class SettingsActivity: AppCompatActivity(), AnkoLogger {
+class SettingsView: AppCompatActivity(), AnkoLogger {
 
     lateinit var presenter: SettingsPresenter
 

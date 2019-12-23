@@ -1,4 +1,4 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.authentication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
 
-class AuthenticationActivity: AppCompatActivity(), AnkoLogger {
+class AuthenticationView: AppCompatActivity(), AnkoLogger {
 
     lateinit var presenter: AuthenticationPresenter
 

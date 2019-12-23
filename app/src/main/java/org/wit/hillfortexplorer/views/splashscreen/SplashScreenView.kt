@@ -1,14 +1,13 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.splashscreen
 
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 
-class SplashScreenActivity: AppCompatActivity() {
+class SplashScreenView: AppCompatActivity() {
 
     val SPLASHSCREEN_DISPLAY_LENGTH = 2000
 
@@ -18,7 +17,7 @@ class SplashScreenActivity: AppCompatActivity() {
 
         Handler().postDelayed(Runnable {
             run {
-                startActivity(intentFor<AuthenticationActivity>())
+                startActivity(intentFor<AuthenticationView>())
             }
         }, SPLASHSCREEN_DISPLAY_LENGTH.toLong())
     }

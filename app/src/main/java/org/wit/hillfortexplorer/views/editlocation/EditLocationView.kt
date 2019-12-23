@@ -1,4 +1,4 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.editlocation
 
 import android.app.Activity
 import android.content.Intent
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     var location = Location()

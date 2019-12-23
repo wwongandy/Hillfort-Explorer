@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.HillfortsMapActivity"
+            android:name=".views.hillfortsmap.HillfortsMapView"
             android:label="@string/title_activity_hillforts_map"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.HillfortListActivity" />
+                android:value=".views.hillfortlist.HillfortListActivity" />
         </activity>
 
         <meta-data
@@ -27,25 +27,25 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".views.editlocation.EditLocationView"
             android:label="@string/title_activity_map">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.HillfortActivity" />
+                android:value=".views.hillfort.HillfortView" />
         </activity>
-        <activity android:name=".activities.SettingsActivity">
+        <activity android:name=".views.settings.SettingsView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.HillfortListActivity" />
+                android:value=".views.hillfortlist.HillfortListActivity" />
         </activity>
-        <activity android:name=".activities.HillfortActivity">
+        <activity android:name=".views.hillfort.HillfortView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.HillfortListActivity" />
+                android:value=".views.hillfortlist.HillfortListActivity" />
         </activity>
-        <activity android:name=".activities.HillfortListActivity"></activity>
-        <activity android:name=".activities.AuthenticationActivity"></activity>
-        <activity android:name=".activities.SplashScreenActivity">
+        <activity android:name=".views.hillfortlist.HillfortListActivity"></activity>
+        <activity android:name=".views.authentication.AuthenticationView"></activity>
+        <activity android:name=".views.splashscreen.SplashScreenView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

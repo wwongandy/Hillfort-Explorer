@@ -1,9 +1,9 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.hillfortsmap
 
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.HillfortModel
 
-class HillfortsMapPresenter(val view: HillfortsMapActivity) {
+class HillfortsMapPresenter(val view: HillfortsMapView) {
 
     var app: MainApp
 

@@ -1,11 +1,15 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.hillfortlist
 
 import android.content.Intent
 import android.view.MenuItem
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.views.hillfort.HillfortView
+import org.wit.hillfortexplorer.views.hillfortsmap.HillfortsMapView
+import org.wit.hillfortexplorer.views.settings.SettingsView
 import org.wit.hillfortexplorer.main.MainApp
+import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 
 class HillfortListPresenter(val view: HillfortListActivity) {
 
@@ -21,10 +25,10 @@ class HillfortListPresenter(val view: HillfortListActivity) {
 
     fun doOptionsItemSelected(item: MenuItem) {
         when (item?.itemId) {
-            R.id.item_add -> view.startActivityForResult<HillfortActivity>(0)
-            R.id.item_map -> view.startActivity<HillfortsMapActivity>()
-            R.id.item_settings -> view.startActivity<SettingsActivity>()
-            R.id.item_logout -> view.startActivity<AuthenticationActivity>()
+            R.id.item_add -> view.startActivityForResult<HillfortView>(0)
+            R.id.item_map -> view.startActivity<HillfortsMapView>()
+            R.id.item_settings -> view.startActivity<SettingsView>()
+            R.id.item_logout -> view.startActivity<AuthenticationView>()
         }
     }
 

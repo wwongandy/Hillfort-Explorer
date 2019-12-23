@@ -1,7 +1,6 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.hillfortsmap
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -12,11 +11,9 @@ import org.wit.hillfortexplorer.R
 
 import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
-import org.wit.hillfortexplorer.helpers.readImageFromPath
-import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
 
-class HillfortsMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class HillfortsMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     lateinit var presenter: HillfortsMapPresenter
     lateinit var map: GoogleMap

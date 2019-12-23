@@ -1,12 +1,13 @@
-package org.wit.hillfortexplorer.activities
+package org.wit.hillfortexplorer.views.settings
 
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.intentFor
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.main.MainApp
+import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 
-class SettingsPresenter(val view: SettingsActivity) {
+class SettingsPresenter(val view: SettingsView) {
 
     var app: MainApp
 
@@ -65,7 +66,7 @@ class SettingsPresenter(val view: SettingsActivity) {
 
     fun doOptionsItemSelected(item: MenuItem) {
         when (item?.itemId) {
-            R.id.item_logout -> view.startActivity(view.intentFor<AuthenticationActivity>())
+            R.id.item_logout -> view.startActivity(view.intentFor<AuthenticationView>())
         }
     }
 
