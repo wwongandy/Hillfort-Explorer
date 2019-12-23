@@ -15,7 +15,7 @@ class HillfortListPresenter(val view: HillfortListActivity) {
         app = view.application as MainApp
     }
 
-    fun loadHillforts() {
+    fun doLoadHillforts() {
         view.showHillforts(app.hillforts.findAll(app.currentUser.id))
     }
 
@@ -29,6 +29,6 @@ class HillfortListPresenter(val view: HillfortListActivity) {
     }
 
     fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loadHillforts()
+        doLoadHillforts()
     }
 }

@@ -26,7 +26,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        presenter.loadHillforts()
+        presenter.doLoadHillforts()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
