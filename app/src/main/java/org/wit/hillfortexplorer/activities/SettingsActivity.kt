@@ -6,76 +6,35 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
-import org.wit.hillfortexplorer.main.MainApp
 
 class SettingsActivity: AppCompatActivity(), AnkoLogger {
 
-    lateinit var app : MainApp
+    lateinit var presenter: SettingsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        app = application as MainApp
+        presenter = SettingsPresenter(this)
 
         toolbarSettings.title = title
         setSupportActionBar(toolbarSettings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val statistics = app.hillforts.getUserStatistics(app.currentUser.id)
-        statsView.setText(
-            "Total number of hillforts: ${statistics.totalNumberOfHillforts}\n" +
-            "Number of hillforts visited: ${statistics.visitedHillforts}\n" +
-            "Visited this year: ${statistics.visitedThisYear}\n" +
-            "Visited this month: ${statistics.visitedThisMonth}"
-        )
+        presenter.doInitStatsView()
 
         changeUsername.setOnClickListener {
-            val _username = app.currentUser.username
-            val _password = app.currentUser.password
-            val oldUsername = oldUsername.text.toString()
-            val newUsername = newUsername.text.toString()
-
-            if (!sameCredentials(oldUsername, _username)) {
-                toast(R.string.invalid_oldUsername)
-            } else if (newUsername.isEmpty()) {
-                toast(R.string.invalid_newUsername)
-            } else if (!app.users.ensureUniqueCredentials(newUsername, _password)) {
-                toast(R.string.duplicate_newUsername)
-            } else {
-                app.users.changeUsername(_username, _password, newUsername)
-                app.currentUser = app.users.authenticate(newUsername, _password)
-
-                toast(R.string.valid_changeUsername)
-            }
+            presenter.doChangeUsername()
         }
 
         changePassword.setOnClickListener {
-            val _username = app.currentUser.username
-            val _password = app.currentUser.password
-            val oldPassword = oldPassword.text.toString()
-            val newPassword = newPassword.text.toString()
-
-            if (!sameCredentials(oldPassword, _password)) {
-                toast(R.string.invalid_oldPassword)
-            } else if (newPassword.isEmpty()) {
-                toast(R.string.invalid_newPassword)
-            } else {
-                app.users.changePassword(_username, _password, newPassword)
-                app.currentUser = app.users.authenticate(_username, newPassword)
-
-                toast(R.string.valid_changePassword)
-            }
+            presenter.doChangePassword()
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
-            R.id.item_logout -> startActivity(intentFor<AuthenticationActivity>())
-        }
-
+        presenter.doOptionsItemSelected(item)
         return super.onOptionsItemSelected(item)
     }
 
@@ -84,7 +43,31 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun sameCredentials(first: String, second: String): Boolean {
-        return first.equals(second)
+    fun notifyInvalidOldUsername() {
+        toast(R.string.invalid_oldUsername)
+    }
+
+    fun notifiyInvalidNewUsername() {
+        toast(R.string.invalid_newUsername)
+    }
+
+    fun notifyDuplicateUsername() {
+        toast(R.string.duplicate_newUsername)
+    }
+
+    fun notifiyUsernameChanged() {
+        toast(R.string.valid_changeUsername)
+    }
+
+    fun notifiyInvalidOldPassword() {
+        toast(R.string.invalid_oldPassword)
+    }
+
+    fun notifyInvalidNewPassword() {
+        toast(R.string.invalid_newPassword)
+    }
+
+    fun notifyPasswordChanged() {
+        toast(R.string.valid_changePassword)
     }
 }
