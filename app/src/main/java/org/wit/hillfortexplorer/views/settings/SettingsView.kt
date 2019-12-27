@@ -3,33 +3,55 @@ package org.wit.hillfortexplorer.views.settings
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.models.HillfortUserStats
+import org.wit.hillfortexplorer.views.BaseView
 
-class SettingsView: AppCompatActivity(), AnkoLogger {
+class SettingsView: BaseView(), AnkoLogger {
 
     lateinit var presenter: SettingsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        presenter = SettingsPresenter(this)
+        presenter = (initPresenter(SettingsPresenter(this))) as SettingsPresenter
 
-        toolbarSettings.title = title
-        setSupportActionBar(toolbarSettings)
+        init(toolbarSettings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        presenter.doInitStatsView()
+        setUserStatistics(presenter.getUserStatistics())
 
         changeUsername.setOnClickListener {
-            presenter.doChangeUsername()
+            val oldUsername = oldUsername.text.toString()
+            val newUsername = newUsername.text.toString()
+
+            if (!presenter.checkCorrectOldUsername(oldUsername)) {
+                notifyInvalidOldUsername()
+            } else if (newUsername.isEmpty()) {
+                notifiyInvalidNewUsername()
+            } else if (!presenter.checkIsDuplicateUsername(newUsername)) {
+                notifyDuplicateUsername()
+            } else {
+                presenter.doChangeUsername(newUsername)
+                notifiyUsernameChanged()
+            }
         }
 
         changePassword.setOnClickListener {
-            presenter.doChangePassword()
+            val oldPassword = oldPassword.text.toString()
+            val newPassword = newPassword.text.toString()
+
+            if (!presenter.checkCorrectOldPassword(oldPassword)) {
+                notifiyInvalidOldPassword()
+            } else if (newPassword.isEmpty()) {
+                notifyInvalidNewPassword()
+            } else {
+                presenter.doChangePassword(newPassword)
+                notifyPasswordChanged()
+            }
         }
     }
 
@@ -69,5 +91,14 @@ class SettingsView: AppCompatActivity(), AnkoLogger {
 
     fun notifyPasswordChanged() {
         toast(R.string.valid_changePassword)
+    }
+
+    fun setUserStatistics(statistics: HillfortUserStats) {
+        statsView.setText(
+            "Total number of hillforts: ${statistics.totalNumberOfHillforts}\n" +
+            "Number of hillforts visited: ${statistics.visitedHillforts}\n" +
+            "Visited this year: ${statistics.visitedThisYear}\n" +
+            "Visited this month: ${statistics.visitedThisMonth}"
+        )
     }
 }
