@@ -5,9 +5,11 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import org.jetbrains.anko.intentFor
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.views.BaseView
+import org.wit.hillfortexplorer.views.VIEW
 import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 
-class SplashScreenView: AppCompatActivity() {
+class SplashScreenView: BaseView() {
 
     val SPLASHSCREEN_DISPLAY_LENGTH = 2000
 
@@ -17,7 +19,7 @@ class SplashScreenView: AppCompatActivity() {
 
         Handler().postDelayed(Runnable {
             run {
-                startActivity(intentFor<AuthenticationView>())
+                navigateTo(VIEW.AUTHENTICATION)
             }
         }, SPLASHSCREEN_DISPLAY_LENGTH.toLong())
     }
