@@ -12,8 +12,9 @@ import org.wit.hillfortexplorer.R
 import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
+import org.wit.hillfortexplorer.views.BaseView
 
-class HillfortsMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
     lateinit var presenter: HillfortsMapPresenter
     lateinit var map: GoogleMap
@@ -21,10 +22,9 @@ class HillfortsMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillforts_map)
-        presenter = HillfortsMapPresenter(this)
+        presenter = (initPresenter(HillfortsMapPresenter(this))) as HillfortsMapPresenter
 
-        toolbar.title = title
-        setSupportActionBar(toolbar)
+        init(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mapView.onCreate(savedInstanceState)
