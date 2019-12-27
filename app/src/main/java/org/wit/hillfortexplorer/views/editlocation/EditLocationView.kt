@@ -16,8 +16,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.models.Location
+import org.wit.hillfortexplorer.views.BaseView
 
-class EditLocationView : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     var location = Location()
@@ -25,8 +26,8 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
-        toolbar.title = title
-        setSupportActionBar(toolbar)
+
+        init(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         location = intent.extras?.getParcelable<Location>("location")!!
