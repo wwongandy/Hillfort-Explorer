@@ -84,7 +84,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
 
                     newImageList.add(newImage)
                     hillfort.images = newImageList
-                    view?.updateHillfortImagesView()
+                    view?.updateHillfortImagesView(hillfort)
                 }
             }
 

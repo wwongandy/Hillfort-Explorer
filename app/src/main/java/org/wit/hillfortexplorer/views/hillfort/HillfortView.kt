@@ -61,7 +61,7 @@ class HillfortView : BaseView(), AnkoLogger {
 
         removeImage.setOnClickListener {
             presenter.doRemoveImage(formImagePager.currentItem)
-            updateHillfortImagesView()
+            updateHillfortImagesView(presenter.hillfort)
         }
 
         hillfortLocation.setOnClickListener {
@@ -116,11 +116,11 @@ class HillfortView : BaseView(), AnkoLogger {
         additionalNotes.setText(hillfort.additionalNotes)
         isVisited.isChecked = hillfort.isVisited
 
-        updateHillfortImagesView()
+        updateHillfortImagesView(hillfort)
     }
 
-    override fun updateHillfortImagesView() {
-        if (presenter.hillfort.images.isEmpty()) {
+    override fun updateHillfortImagesView(hillfort: HillfortModel) {
+        if (hillfort.images.isEmpty()) {
             imageLayout.visibility = View.GONE
             removeImage.visibility = View.GONE
         } else {
@@ -128,7 +128,7 @@ class HillfortView : BaseView(), AnkoLogger {
             removeImage.visibility = View.VISIBLE
             chooseImage.setText(R.string.select_more_images)
 
-            formImagePager.adapter = ImagePagerAdapter(this, presenter.hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
+            formImagePager.adapter = ImagePagerAdapter(this, hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
         }
     }
 }

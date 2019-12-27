@@ -43,6 +43,8 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
             intent.putExtra(key, value)
         }
 
+        print("boop: Loading new activity")
+
         startActivityForResult(intent, code)
     }
 
@@ -82,5 +84,6 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
     }
 
     open fun showHillfort(hillfort: HillfortModel) {}
-    open fun updateHillfortImagesView() {}
+    open fun updateHillfortImagesView(hillfort: HillfortModel) {}
+    open fun showHillforts(hillforts: List<HillfortModel>) {}
 }

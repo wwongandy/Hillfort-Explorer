@@ -9,30 +9,27 @@ import org.wit.hillfortexplorer.views.hillfort.HillfortView
 import org.wit.hillfortexplorer.views.hillfortsmap.HillfortsMapView
 import org.wit.hillfortexplorer.views.settings.SettingsView
 import org.wit.hillfortexplorer.main.MainApp
+import org.wit.hillfortexplorer.views.BasePresenter
+import org.wit.hillfortexplorer.views.BaseView
+import org.wit.hillfortexplorer.views.VIEW
 import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 
-class HillfortListPresenter(val view: HillfortListView) {
-
-    var app: MainApp
+class HillfortListPresenter(view: BaseView): BasePresenter(view) {
 
     init {
         app = view.application as MainApp
     }
 
     fun doLoadHillforts() {
-        view.showHillforts(app.hillforts.findAll(app.currentUser.id))
+        view?.showHillforts(app.hillforts.findAll(app.currentUser.id))
     }
 
-    fun doOptionsItemSelected(item: MenuItem) {
+    override fun doOptionsItemSelected(item: MenuItem) {
         when (item?.itemId) {
-            R.id.item_add -> view.startActivityForResult<HillfortView>(0)
-            R.id.item_map -> view.startActivity<HillfortsMapView>()
-            R.id.item_settings -> view.startActivity<SettingsView>()
-            R.id.item_logout -> view.startActivity<AuthenticationView>()
+            R.id.item_add -> view?.navigateTo(VIEW.HILLFORT, 0)
+            R.id.item_map -> view?.navigateTo(VIEW.HILLFORTSMAP)
+            R.id.item_settings -> view?.navigateTo(VIEW.SETTINGS)
+            R.id.item_logout -> view?.navigateTo(VIEW.AUTHENTICATION)
         }
-    }
-
-    fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        doLoadHillforts()
     }
 }
