@@ -2,6 +2,7 @@ package org.wit.hillfortexplorer.views
 
 import android.content.Intent
 import android.os.Parcelable
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
@@ -67,6 +68,11 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        basePresenter?.doOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -76,7 +82,5 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
     }
 
     open fun showHillfort(hillfort: HillfortModel) {}
-    open fun showHillforts(hillforts: List<HillfortModel>) {}
-    open fun showProgress() {}
-    open fun hideProgress() {}
+    open fun updateHillfortImagesView() {}
 }

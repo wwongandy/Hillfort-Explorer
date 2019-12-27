@@ -1,13 +1,18 @@
 package org.wit.hillfortexplorer.views
 
 import android.content.Intent
+import android.view.MenuItem
 import org.wit.hillfortexplorer.main.MainApp
 
 open class BasePresenter(var view: BaseView?) {
 
     var app: MainApp = view?.application as MainApp
 
-    open fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    open fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+    }
+
+    open fun doOptionsItemSelected(item: MenuItem) {
 
     }
 

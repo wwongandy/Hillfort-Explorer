@@ -1,11 +1,8 @@
 package org.wit.hillfortexplorer.views.hillfort
 
 import android.app.DatePickerDialog
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
@@ -14,20 +11,28 @@ import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.helpers.showImagePicker
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
+import org.wit.hillfortexplorer.views.BaseView
+import org.wit.hillfortexplorer.views.IMAGE_REQUEST
 import java.util.*
 
-class HillfortView : AppCompatActivity(), AnkoLogger {
+class HillfortView : BaseView(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
+
+    val MAX_HILLFORT_IMAGES_ALLOWED = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
-        presenter = HillfortPresenter(this)
 
-        toolbarAdd.title = title
-        setSupportActionBar(toolbarAdd)
+        init(toolbarAdd)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
+
+        if (presenter.edit) {
+            btnAdd.setText(R.string.save_hillfort)
+        }
 
         if (presenter.hillfort.images.isEmpty()) {
             imageLayout.visibility = View.GONE
@@ -39,19 +44,24 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         }
 
         btnAdd.setOnClickListener() {
-            if (hillfortTitle.toString().isEmpty() || description.toString().isEmpty()) {
+            if (hillfortTitle.text.toString().isEmpty() || description.text.toString().isEmpty()) {
                 toast(R.string.enter_hillfort_title)
             } else {
-                presenter.doCreateOrUpdate()
+                presenter.doCreateOrUpdate(hillfortTitle.text.toString(), description.text.toString(), additionalNotes.text.toString(), isVisited.isChecked)
             }
         }
 
         chooseImage.setOnClickListener {
-            showImagePicker(this, presenter.IMAGE_REQUEST)
+            if (presenter.hillfort.images.size >= MAX_HILLFORT_IMAGES_ALLOWED) {
+                toast("You cannot have more than $MAX_HILLFORT_IMAGES_ALLOWED images")
+            } else {
+                showImagePicker(this, IMAGE_REQUEST)
+            }
         }
 
         removeImage.setOnClickListener {
-            presenter.doRemoveImage()
+            presenter.doRemoveImage(formImagePager.currentItem)
+            updateHillfortImagesView()
         }
 
         hillfortLocation.setOnClickListener {
@@ -59,7 +69,13 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         }
 
         isVisited.setOnClickListener {
-            presenter.doUpdateVisitedFlag()
+            presenter.doUpdateVisitedFlag(isVisited.isChecked)
+
+            if (presenter.hillfort.isVisited) {
+                dateVisited.visibility = View.VISIBLE
+            } else {
+                dateVisited.visibility = View.GONE
+            }
         }
 
         // Setting up the date picker dialog
@@ -82,7 +98,10 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
             )
 
             datePicker.show()
-            notifyVisitedDate(presenter.hillfort)
+
+            if (presenter.hillfort.dateVisited != null) {
+                toast("Date Visited: ${presenter.hillfort.dateVisited.toString()}")
+            }
         }
     }
 
@@ -91,33 +110,17 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        presenter.doOptionsItemSelected(item)
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        presenter.doActivityResult(requestCode, resultCode, data)
-    }
-
-    fun showToEditHillfort(hillfort: HillfortModel) {
+    override fun showHillfort(hillfort: HillfortModel) {
         hillfortTitle.setText(hillfort.title)
         description.setText(hillfort.description)
         additionalNotes.setText(hillfort.additionalNotes)
         isVisited.isChecked = hillfort.isVisited
-        btnAdd.setText(R.string.save_hillfort)
 
-        updateHillfortImagesView(hillfort)
-        notifyVisitedDate(hillfort)
-
-        if (hillfort.images.size > 1) {
-            notifySwipeForImagesViewing()
-        }
+        updateHillfortImagesView()
     }
 
-    fun updateHillfortImagesView(hillfort: HillfortModel) {
-        if (hillfort.images.isEmpty()) {
+    override fun updateHillfortImagesView() {
+        if (presenter.hillfort.images.isEmpty()) {
             imageLayout.visibility = View.GONE
             removeImage.visibility = View.GONE
         } else {
@@ -125,29 +128,7 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
             removeImage.visibility = View.VISIBLE
             chooseImage.setText(R.string.select_more_images)
 
-            formImagePager.adapter = ImagePagerAdapter(this, hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
+            formImagePager.adapter = ImagePagerAdapter(this, presenter.hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
         }
-    }
-
-    fun updateVisitedCheckbox(hillfort: HillfortModel) {
-        if (hillfort.isVisited) {
-            dateVisited.visibility = View.VISIBLE
-        } else {
-            dateVisited.visibility = View.GONE
-        }
-    }
-
-    fun notifyVisitedDate(hillfort: HillfortModel) {
-        if (hillfort.dateVisited != null) {
-            toast("Date visited: ${hillfort.dateVisited}")
-        }
-    }
-
-    fun notifyExceededImagesLimit() {
-        toast("You cannot have more than $presenter.MAX_HILLFORT_IMAGES_ALLOWED images")
-    }
-
-    fun notifySwipeForImagesViewing() {
-        toast("Swipe to view your other images")
     }
 }
