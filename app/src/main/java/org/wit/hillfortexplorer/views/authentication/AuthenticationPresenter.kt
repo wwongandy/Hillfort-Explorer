@@ -1,39 +1,31 @@
 package org.wit.hillfortexplorer.views.authentication
 
-import kotlinx.android.synthetic.main.activity_authentication.*
-import org.jetbrains.anko.intentFor
-import org.wit.hillfortexplorer.views.hillfortlist.HillfortListView
 import org.wit.hillfortexplorer.main.MainApp
+import org.wit.hillfortexplorer.views.BasePresenter
+import org.wit.hillfortexplorer.views.BaseView
+import org.wit.hillfortexplorer.views.VIEW
 
-class AuthenticationPresenter(val view: AuthenticationView) {
+class AuthenticationPresenter(view: BaseView): BasePresenter(view) {
 
-    var app : MainApp
+    var validRegistration: Boolean = false
+    var validLogin: Boolean = false
 
     init {
         app = view.application as MainApp
     }
 
-    fun doRegisterUser() {
-        val username = view.username.text.toString()
-        val password = view.password.text.toString()
-
+    fun doRegisterUser(username: String, password: String) {
         if (username.isNotEmpty() && password.isNotEmpty()) {
-            val validRegistration = app.users.register(username, password)
-            view.notifiyRegistrationSuccess(validRegistration)
-        } else {
-            view.notifyEnterUsernameAndPassword()
+            validRegistration = app.users.register(username, password)
         }
     }
 
-    fun doLoginUser() {
-        val username = view.username.text.toString()
-        val password = view.password.text.toString()
-
+    fun doLoginUser(username: String, password: String) {
         app.currentUser = app.users.authenticate(username, password)
         if (app.currentUser.username.isNotEmpty()) {
-            view.startActivity(view.intentFor<HillfortListView>())
-        } else {
-            view.notifyInvalidLogin()
+            validLogin = true
+
+            view?.navigateTo(VIEW.HILLFORTLIST)
         }
     }
 }
