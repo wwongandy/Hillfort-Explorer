@@ -13,7 +13,7 @@ import org.wit.hillfortexplorer.models.HillfortAdapter
 import org.wit.hillfortexplorer.models.HillfortListener
 import org.wit.hillfortexplorer.models.HillfortModel
 
-class HillfortListActivity : AppCompatActivity(), HillfortListener {
+class HillfortListView : AppCompatActivity(), HillfortListener {
 
     lateinit var presenter: HillfortListPresenter
 

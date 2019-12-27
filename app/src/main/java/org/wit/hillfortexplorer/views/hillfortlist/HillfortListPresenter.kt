@@ -11,7 +11,7 @@ import org.wit.hillfortexplorer.views.settings.SettingsView
 import org.wit.hillfortexplorer.main.MainApp
 import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 
-class HillfortListPresenter(val view: HillfortListActivity) {
+class HillfortListPresenter(val view: HillfortListView) {
 
     var app: MainApp
 

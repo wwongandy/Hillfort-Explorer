@@ -10,7 +10,7 @@ import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.views.authentication.AuthenticationView
 import org.wit.hillfortexplorer.views.editlocation.EditLocationView
 import org.wit.hillfortexplorer.views.hillfort.HillfortView
-import org.wit.hillfortexplorer.views.hillfortlist.HillfortListActivity
+import org.wit.hillfortexplorer.views.hillfortlist.HillfortListView
 import org.wit.hillfortexplorer.views.hillfortsmap.HillfortsMapView
 import org.wit.hillfortexplorer.views.settings.SettingsView
 import org.wit.hillfortexplorer.views.splashscreen.SplashScreenView
@@ -27,13 +27,13 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
     var basePresenter: BasePresenter ?= null
 
     fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable ?= null) {
-        var intent = Intent(this, HillfortListActivity::class.java)
+        var intent = Intent(this, HillfortListView::class.java)
 
         when(view) {
             VIEW.AUTHENTICATION  -> intent = Intent(this, AuthenticationView::class.java)
             VIEW.EDITLOCATION  -> intent = Intent(this, EditLocationView::class.java)
             VIEW.HILLFORT  -> intent = Intent(this, HillfortView::class.java)
-            VIEW.HILLFORTLIST -> intent = Intent(this, HillfortListActivity::class.java)
+            VIEW.HILLFORTLIST -> intent = Intent(this, HillfortListView::class.java)
             VIEW.HILLFORTSMAP  -> intent = Intent(this, HillfortsMapView::class.java)
             VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
             VIEW.SPLASHSCREEN -> intent = Intent(this, SplashScreenView::class.java)

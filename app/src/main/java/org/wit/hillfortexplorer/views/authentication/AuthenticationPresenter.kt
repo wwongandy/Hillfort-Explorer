@@ -2,7 +2,7 @@ package org.wit.hillfortexplorer.views.authentication
 
 import kotlinx.android.synthetic.main.activity_authentication.*
 import org.jetbrains.anko.intentFor
-import org.wit.hillfortexplorer.views.hillfortlist.HillfortListActivity
+import org.wit.hillfortexplorer.views.hillfortlist.HillfortListView
 import org.wit.hillfortexplorer.main.MainApp
 
 class AuthenticationPresenter(val view: AuthenticationView) {
@@ -31,7 +31,7 @@ class AuthenticationPresenter(val view: AuthenticationView) {
 
         app.currentUser = app.users.authenticate(username, password)
         if (app.currentUser.username.isNotEmpty()) {
-            view.startActivity(view.intentFor<HillfortListActivity>())
+            view.startActivity(view.intentFor<HillfortListView>())
         } else {
             view.notifyInvalidLogin()
         }

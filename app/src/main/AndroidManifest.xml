@@ -19,7 +19,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.hillfortlist.HillfortListActivity" />
+                android:value=".views.hillfortlist.HillfortListView" />
         </activity>
 
         <meta-data
@@ -36,14 +36,14 @@
         <activity android:name=".views.settings.SettingsView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.hillfortlist.HillfortListActivity" />
+                android:value=".views.hillfortlist.HillfortListView" />
         </activity>
         <activity android:name=".views.hillfort.HillfortView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.hillfortlist.HillfortListActivity" />
+                android:value=".views.hillfortlist.HillfortListView" />
         </activity>
-        <activity android:name=".views.hillfortlist.HillfortListActivity"></activity>
+        <activity android:name=".views.hillfortlist.HillfortListView"></activity>
         <activity android:name=".views.authentication.AuthenticationView"></activity>
         <activity android:name=".views.splashscreen.SplashScreenView">
             <intent-filter>
