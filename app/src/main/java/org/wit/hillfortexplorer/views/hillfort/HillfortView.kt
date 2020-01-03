@@ -158,7 +158,10 @@ class HillfortView : BaseView(), AnkoLogger {
         additionalNotes.setText(hillfort.additionalNotes)
         isVisited.isChecked = hillfort.isVisited
         updateHillfortImagesView(hillfort)
+    }
 
+    override fun updateHillfortLocation(hillfort: HillfortModel) {
+        super.updateHillfortLocation(hillfort)
         location.setText("Lat: %.6f".format(hillfort.location.lat) + "\nLng: %.6f".format(hillfort.location.lng))
     }
 

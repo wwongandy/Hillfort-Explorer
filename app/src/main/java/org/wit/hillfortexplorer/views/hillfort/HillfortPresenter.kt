@@ -132,7 +132,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.location.lat, hillfort.location.lng))
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), 15f))
-        view?.showHillfort(hillfort)
+        view?.updateHillfortLocation(hillfort)
     }
 
     @SuppressLint("MissingPermission")
