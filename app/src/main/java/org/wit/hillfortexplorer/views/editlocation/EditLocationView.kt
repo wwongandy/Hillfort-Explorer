@@ -27,8 +27,7 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_location)
 
-        init(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        init(toolbar, true)
 
         location = intent.extras?.getParcelable<Location>("location")!!
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.

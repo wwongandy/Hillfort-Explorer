@@ -19,8 +19,7 @@ class SettingsView: BaseView(), AnkoLogger {
         setContentView(R.layout.activity_settings)
         presenter = (initPresenter(SettingsPresenter(this))) as SettingsPresenter
 
-        init(toolbarSettings)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        init(toolbarSettings, true)
 
         setUserStatistics(presenter.getUserStatistics())
 
