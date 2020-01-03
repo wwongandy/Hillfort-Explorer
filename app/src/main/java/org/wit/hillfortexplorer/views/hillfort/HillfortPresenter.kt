@@ -3,6 +3,10 @@ package org.wit.hillfortexplorer.views.hillfort
 import android.content.Intent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.Location
@@ -14,12 +18,17 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
 
     var hillfort = HillfortModel()
     var edit = false
+    var map: GoogleMap ?= null
+
+    var defaultLocation = Location(52.245696, -7.139102, 15f)
 
     init {
         if (view.intent.hasExtra("hillfort_edit")) {
             edit = true
             hillfort = view.intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             view.showHillfort(hillfort)
+        } else {
+            hillfort.location = defaultLocation
         }
     }
 
@@ -47,14 +56,11 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun doShowLocationSelectionMap() {
-        val location = Location(52.245696, -7.139102, 15f)
-        if (hillfort.location.zoom != 0f) {
-            location.lat = hillfort.location.lat
-            location.lng = hillfort.location.lng
-            location.zoom = hillfort.location.zoom
+        if (edit) {
+            view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", hillfort.location)
+        } else {
+            view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", defaultLocation)
         }
-
-        view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", location)
     }
 
     fun doUpdateVisitedFlag(isVisited: Boolean) {
@@ -91,9 +97,31 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
             LOCATION_REQUEST -> {
                 if (data != null) {
                     val location = data.extras?.getParcelable<Location>("location")!!
-                    hillfort.location = location
+                    locationUpdate(location)
                 }
             }
         }
+    }
+
+    fun doConfigureMap(_map: GoogleMap) {
+        map = _map
+        locationUpdate(hillfort.location)
+    }
+
+    fun locationUpdate(location: Location) {
+        val latitude = location.lat
+        val longitude = location.lng
+
+        hillfort.location.lat = latitude
+        hillfort.location.lng = longitude
+        hillfort.location.zoom = 15f
+
+        map?.clear()
+        map?.uiSettings?.isZoomControlsEnabled = true
+
+        val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.location.lat, hillfort.location.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), 15f))
+        view?.showHillfort(hillfort)
     }
 }

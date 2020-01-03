@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
@@ -18,6 +19,7 @@ import java.util.*
 class HillfortView : BaseView(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
+    lateinit var map: GoogleMap
 
     val MAX_HILLFORT_IMAGES_ALLOWED = 4
 
@@ -103,6 +105,37 @@ class HillfortView : BaseView(), AnkoLogger {
                 toast("Date Visited: ${presenter.hillfort.dateVisited.toString()}")
             }
         }
+
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
