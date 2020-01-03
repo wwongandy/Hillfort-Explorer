@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/item_save"
+        android:title="@string/menu_saveHillfort"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/item_delete"
         android:title="@string/menu_deleteHillfort"
         app:showAsAction="always"/>

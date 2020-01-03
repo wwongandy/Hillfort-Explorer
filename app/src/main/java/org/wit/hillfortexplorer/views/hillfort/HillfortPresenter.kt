@@ -2,16 +2,17 @@ package org.wit.hillfortexplorer.views.hillfort
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.helpers.checkLocationPermissions
+import org.wit.hillfortexplorer.helpers.createDefaultLocationRequest
 import org.wit.hillfortexplorer.helpers.isPermissionGranted
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.Location
@@ -26,6 +27,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     var map: GoogleMap ?= null
 
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+    val locationRequest = createDefaultLocationRequest()
     var defaultLocation = Location(52.245696, -7.139102, 15f)
 
     init {
@@ -85,15 +87,6 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         hillfort.dateVisited = parsedDate
     }
 
-    override fun doOptionsItemSelected(item: MenuItem) {
-        when (item?.itemId) {
-            R.id.item_delete -> {
-                app.hillforts.delete(hillfort)
-                view?.finish()
-            }
-        }
-    }
-
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             IMAGE_REQUEST -> {
@@ -114,6 +107,10 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
                 }
             }
         }
+    }
+
+    fun doDeleteHillfort() {
+        app.hillforts.delete(hillfort)
     }
 
     fun doConfigureMap(_map: GoogleMap) {
@@ -142,6 +139,21 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
             locationUpdate(Location(it.latitude, it.longitude, 15f))
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object: LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(Location(l.latitude, l.longitude, 15f))
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
         }
     }
 }

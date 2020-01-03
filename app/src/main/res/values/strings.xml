@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">HillfortExplorer</string>
-    <string name="button_addHillfort">Add Hillfort</string>
+    <string name="menu_saveHillfort">Save</string>
     <string name="hint_hillfortTitle">Hillfort Title</string>
     <string name="hint_hillfortDescription">Description</string>
     <string name="hint_hillfortAdditionalNotes">Additional notes</string>
