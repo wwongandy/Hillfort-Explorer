@@ -33,17 +33,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.hillfort.HillfortView" />
         </activity>
-        <activity android:name=".views.settings.SettingsView">
+        <activity
+            android:name=".views.settings.SettingsView"
+            android:label="@string/title_activity_settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.hillfortlist.HillfortListView" />
         </activity>
-        <activity android:name=".views.hillfort.HillfortView">
+        <activity
+            android:name=".views.hillfort.HillfortView"
+            android:label="@string/title_activity_hillfort" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.hillfortlist.HillfortListView" />
         </activity>
-        <activity android:name=".views.hillfortlist.HillfortListView"></activity>
+        <activity
+            android:name=".views.hillfortlist.HillfortListView"
+            android:label="@string/title_activity_hillforts">
+        </activity>
         <activity android:name=".views.authentication.AuthenticationView"></activity>
         <activity android:name=".views.splashscreen.SplashScreenView">
             <intent-filter>

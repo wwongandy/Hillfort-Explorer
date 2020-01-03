@@ -47,4 +47,7 @@
     <string name="hillfort_image_placeholder">No image of Hillfort found</string>
     <string name="hillfort_title_placeholder">Hillfort name</string>
     <string name="hillfort_description_placeholder">Hillfort description</string>
+    <string name="title_activity_hillforts">All Hillforts</string>
+    <string name="title_activity_hillfort">Hillfort</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
