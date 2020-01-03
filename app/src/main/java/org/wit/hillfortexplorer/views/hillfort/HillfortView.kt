@@ -135,6 +135,8 @@ class HillfortView : BaseView(), AnkoLogger {
                 presenter.doDeleteHillfort()
                 finish()
             }
+
+            android.R.id.home -> finish()
         }
 
         return true

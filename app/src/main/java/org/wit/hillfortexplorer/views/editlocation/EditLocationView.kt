@@ -27,7 +27,7 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_location)
 
-        init(toolbar, true)
+        init(toolbar, false)
 
         location = intent.extras?.getParcelable<Location>("location")!!
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -64,7 +64,6 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId) {
             R.id.item_save -> returnLocationData()
-            android.R.id.home -> returnLocationData()
         }
 
         return super.onOptionsItemSelected(item)
