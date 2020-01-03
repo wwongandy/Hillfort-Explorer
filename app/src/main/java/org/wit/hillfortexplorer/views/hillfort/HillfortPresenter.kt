@@ -1,13 +1,18 @@
 package org.wit.hillfortexplorer.views.hillfort
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.helpers.checkLocationPermissions
+import org.wit.hillfortexplorer.helpers.isPermissionGranted
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.Location
 import org.wit.hillfortexplorer.views.*
@@ -20,6 +25,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     var edit = false
     var map: GoogleMap ?= null
 
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     var defaultLocation = Location(52.245696, -7.139102, 15f)
 
     init {
@@ -28,7 +34,18 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
             hillfort = view.intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             view.showHillfort(hillfort)
         } else {
-            hillfort.location = defaultLocation
+            if (checkLocationPermissions(view)) {
+                doSetCurrentLocation()
+            }
+        }
+    }
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            // Permissions denied, so use the default location
+            locationUpdate(defaultLocation)
         }
     }
 
@@ -56,11 +73,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun doShowLocationSelectionMap() {
-        if (edit) {
-            view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", hillfort.location)
-        } else {
-            view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", defaultLocation)
-        }
+        view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", hillfort.location)
     }
 
     fun doUpdateVisitedFlag(isVisited: Boolean) {
@@ -123,5 +136,12 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), 15f))
         view?.showHillfort(hillfort)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(Location(it.latitude, it.longitude, 15f))
+        }
     }
 }
