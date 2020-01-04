@@ -1,13 +1,18 @@
 package org.wit.hillfortexplorer.views.hillfort
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortexplorer.R
+import org.wit.hillfortexplorer.helpers.checkLocationPermissions
+import org.wit.hillfortexplorer.helpers.isPermissionGranted
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.Location
 import org.wit.hillfortexplorer.views.*
@@ -21,6 +26,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
 
     var map: GoogleMap? = null
     var defaultLocation = Location(52.245696, -7.139102, 15f)
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
 
     init {
         if (view.intent.hasExtra("hillfort_edit")) {
@@ -28,8 +34,9 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
             hillfort = view.intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             view.showHillfort(hillfort)
         } else {
-            hillfort.location.lat = defaultLocation.lat
-            hillfort.location.lng = defaultLocation.lng
+            if (checkLocationPermissions(view)) {
+                doSetCurrentLocation()
+            }
         }
     }
 
@@ -56,15 +63,8 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         hillfort.images = newImageList
     }
 
-    fun doShowLocationSelectionMap() {
-        val location = Location(52.245696, -7.139102, 15f)
-        if (hillfort.location.zoom != 0f) {
-            location.lat = hillfort.location.lat
-            location.lng = hillfort.location.lng
-            location.zoom = hillfort.location.zoom
-        }
-
-        view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", location)
+    fun doSetLocation() {
+        view?.navigateTo(VIEW.EDITLOCATION, LOCATION_REQUEST, "location", Location(hillfort.location.lat, hillfort.location.lng, hillfort.location.zoom))
     }
 
     fun doUpdateVisitedFlag(isVisited: Boolean) {
@@ -122,5 +122,21 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
         view?.updateHillfortMapView(hillfort)
+    }
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            // permissions denied, so use the default location
+            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+        }
     }
 }

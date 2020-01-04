@@ -66,7 +66,7 @@ class HillfortView : BaseView(), AnkoLogger {
         }
 
         hillfortLocation.setOnClickListener {
-            presenter.doShowLocationSelectionMap()
+            presenter.doSetLocation()
         }
 
         isVisited.setOnClickListener {
