@@ -3,6 +3,7 @@ package org.wit.hillfortexplorer.views.hillfort
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
@@ -31,10 +32,6 @@ class HillfortView : BaseView(), AnkoLogger {
 
         presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
 
-        if (presenter.edit) {
-            btnAdd.setText(R.string.save_hillfort)
-        }
-
         if (presenter.hillfort.images.isEmpty()) {
             imageLayout.visibility = View.GONE
             removeImage.visibility = View.GONE
@@ -42,14 +39,6 @@ class HillfortView : BaseView(), AnkoLogger {
 
         if (!presenter.hillfort.isVisited) {
             dateVisited.visibility = View.GONE
-        }
-
-        btnAdd.setOnClickListener() {
-            if (hillfortTitle.text.toString().isEmpty() || description.text.toString().isEmpty()) {
-                toast(R.string.enter_hillfort_title)
-            } else {
-                presenter.doCreateOrUpdate(hillfortTitle.text.toString(), description.text.toString(), additionalNotes.text.toString(), isVisited.isChecked)
-            }
         }
 
         chooseImage.setOnClickListener {
@@ -63,10 +52,6 @@ class HillfortView : BaseView(), AnkoLogger {
         removeImage.setOnClickListener {
             presenter.doRemoveImage(formImagePager.currentItem)
             updateHillfortImagesView(presenter.hillfort)
-        }
-
-        hillfortLocation.setOnClickListener {
-            presenter.doSetLocation()
         }
 
         isVisited.setOnClickListener {
@@ -109,12 +94,27 @@ class HillfortView : BaseView(), AnkoLogger {
         mapView.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doSetLocation() }
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_hillfort, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId) {
+            R.id.item_save -> {
+                if (hillfortTitle.text.toString().isEmpty() || description.text.toString().isEmpty()) {
+                    toast(R.string.enter_hillfort_title)
+                } else {
+                    presenter.doCreateOrUpdate(hillfortTitle.text.toString(), description.text.toString(), additionalNotes.text.toString(), isVisited.isChecked)
+                }
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showHillfort(hillfort: HillfortModel) {
@@ -164,6 +164,6 @@ class HillfortView : BaseView(), AnkoLogger {
     }
 
     override fun updateHillfortMapView(hillfort: HillfortModel) {
-
+        hillfortLocation.setText("%.6f".format(hillfort.location.lat) + ", %.6f".format(hillfort.location.lng))
     }
 }
