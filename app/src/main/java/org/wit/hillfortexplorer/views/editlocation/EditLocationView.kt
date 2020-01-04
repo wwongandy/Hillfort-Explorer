@@ -50,12 +50,13 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-                onBackPressed()
+                setResult(Activity.RESULT_OK)
+                finish()
                 return true
             }
 
             R.id.item_save -> {
-                onBackPressed()
+                returnLocationData()
                 return true
             }
         }
@@ -97,11 +98,6 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
         val loc = LatLng(location.lat, location.lng)
         marker.setSnippet("GPS: " + loc.toString())
         return false
-    }
-
-    override fun onBackPressed() {
-        returnLocationData()
-        super.onBackPressed()
     }
 
     private fun returnLocationData() {
