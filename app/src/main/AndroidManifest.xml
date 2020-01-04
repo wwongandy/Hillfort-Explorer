@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".views.hillfortsmap.HillfortsMapView"
             android:label="@string/title_activity_hillforts_map"
@@ -33,19 +34,34 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.hillfort.HillfortView" />
         </activity>
-        <activity android:name=".views.settings.SettingsView">
+
+        <activity
+            android:name=".views.settings.SettingsView"
+            android:label="@string/title_activity_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.hillfortlist.HillfortListView" />
         </activity>
-        <activity android:name=".views.hillfort.HillfortView">
+
+        <activity
+            android:name=".views.hillfort.HillfortView"
+            android:label="@string/title_activity_hillfort">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.hillfortlist.HillfortListView" />
         </activity>
-        <activity android:name=".views.hillfortlist.HillfortListView"></activity>
-        <activity android:name=".views.authentication.AuthenticationView"></activity>
-        <activity android:name=".views.splashscreen.SplashScreenView">
+
+        <activity
+            android:name=".views.hillfortlist.HillfortListView"
+            android:label="@string/title_activity_hillfort_list">
+        </activity>
+
+        <activity
+            android:name=".views.authentication.AuthenticationView">
+        </activity>
+
+        <activity
+            android:name=".views.splashscreen.SplashScreenView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
