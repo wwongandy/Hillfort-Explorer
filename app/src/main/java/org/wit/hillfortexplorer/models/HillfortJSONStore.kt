@@ -75,6 +75,10 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         serialize()
     }
 
+    override fun clear() {
+        hillforts.clear()
+    }
+
     override fun getUserStatistics(userId: String): HillfortUserStats {
         val stats = HillfortUserStats()
         val userHillforts = findAll(userId)

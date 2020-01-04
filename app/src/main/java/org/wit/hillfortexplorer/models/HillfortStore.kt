@@ -8,6 +8,7 @@ interface HillfortStore {
     fun create(hillfort: HillfortModel, userId: String)
     fun update(hillfort: HillfortModel, userId: String)
     fun delete(hillfort: HillfortModel)
+    fun clear()
 
     fun getUserStatistics(userId: String): HillfortUserStats
 }
