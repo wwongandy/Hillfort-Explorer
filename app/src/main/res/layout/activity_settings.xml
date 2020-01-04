@@ -41,19 +41,6 @@
                 android:text="@string/title_settingsUtilities" />
 
             <EditText
-                android:id="@+id/oldUsername"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="8dp"
-                android:autofillHints=""
-                android:hint="@string/hint_oldUsername"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
-
-            <EditText
                 android:id="@+id/newUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,20 +64,6 @@
                 android:text="@string/button_changeUsername"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/oldPassword"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="8dp"
-                android:autofillHints=""
-                android:hint="@string/hint_oldPassword"
-                android:inputType="text|textPassword"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/newPassword"

@@ -24,33 +24,13 @@ class SettingsView: BaseView(), AnkoLogger {
         setUserStatistics(presenter.getUserStatistics())
 
         changeUsername.setOnClickListener {
-            val oldUsername = oldUsername.text.toString()
             val newUsername = newUsername.text.toString()
-
-            if (!presenter.checkCorrectOldUsername(oldUsername)) {
-                notifyInvalidOldUsername()
-            } else if (newUsername.isEmpty()) {
-                notifiyInvalidNewUsername()
-            } else if (!presenter.checkIsDuplicateUsername(newUsername)) {
-                notifyDuplicateUsername()
-            } else {
-                presenter.doChangeUsername(newUsername)
-                notifiyUsernameChanged()
-            }
+            presenter.doChangeUsername(newUsername)
         }
 
         changePassword.setOnClickListener {
-            val oldPassword = oldPassword.text.toString()
             val newPassword = newPassword.text.toString()
-
-            if (!presenter.checkCorrectOldPassword(oldPassword)) {
-                notifiyInvalidOldPassword()
-            } else if (newPassword.isEmpty()) {
-                notifyInvalidNewPassword()
-            } else {
-                presenter.doChangePassword(newPassword)
-                notifyPasswordChanged()
-            }
+            presenter.doChangePassword(newPassword)
         }
     }
 
@@ -62,34 +42,6 @@ class SettingsView: BaseView(), AnkoLogger {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_settings, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-    fun notifyInvalidOldUsername() {
-        toast(R.string.invalid_oldUsername)
-    }
-
-    fun notifiyInvalidNewUsername() {
-        toast(R.string.invalid_newUsername)
-    }
-
-    fun notifyDuplicateUsername() {
-        toast(R.string.duplicate_newUsername)
-    }
-
-    fun notifiyUsernameChanged() {
-        toast(R.string.valid_changeUsername)
-    }
-
-    fun notifiyInvalidOldPassword() {
-        toast(R.string.invalid_oldPassword)
-    }
-
-    fun notifyInvalidNewPassword() {
-        toast(R.string.invalid_newPassword)
-    }
-
-    fun notifyPasswordChanged() {
-        toast(R.string.valid_changePassword)
     }
 
     fun setUserStatistics(statistics: HillfortUserStats) {
