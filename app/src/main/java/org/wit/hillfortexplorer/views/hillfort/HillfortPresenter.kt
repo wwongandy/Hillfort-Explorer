@@ -3,6 +3,10 @@ package org.wit.hillfortexplorer.views.hillfort
 import android.content.Intent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.Location
@@ -15,11 +19,17 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     var hillfort = HillfortModel()
     var edit = false
 
+    var map: GoogleMap? = null
+    var defaultLocation = Location(52.245696, -7.139102, 15f)
+
     init {
         if (view.intent.hasExtra("hillfort_edit")) {
             edit = true
             hillfort = view.intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             view.showHillfort(hillfort)
+        } else {
+            hillfort.location.lat = defaultLocation.lat
+            hillfort.location.lng = defaultLocation.lng
         }
     }
 
@@ -91,9 +101,26 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
             LOCATION_REQUEST -> {
                 if (data != null) {
                     val location = data.extras?.getParcelable<Location>("location")!!
-                    hillfort.location = location
+                    locationUpdate(location.lat, location.lng)
                 }
             }
         }
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(hillfort.location.lat, hillfort.location.lng)
+    }
+
+    fun locationUpdate(lat: Double, lng: Double) {
+        hillfort.location.lat = lat
+        hillfort.location.lng = lng
+        hillfort.location.zoom = 15f
+        map?.clear()
+        map?.uiSettings?.setZoomControlsEnabled(true)
+        val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.location.lat, hillfort.location.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
+        view?.updateHillfortMapView(hillfort)
     }
 }
