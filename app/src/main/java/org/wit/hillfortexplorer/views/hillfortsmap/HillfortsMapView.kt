@@ -11,6 +11,7 @@ import org.wit.hillfortexplorer.R
 
 import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
+import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import org.wit.hillfortexplorer.views.BaseView
 
@@ -39,7 +40,7 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
         presenter.doLoadHillforts().forEach {
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.title).position(loc)
-            map.addMarker(options).tag = it.id
+            map.addMarker(options).tag = it
 
             // Move camera to most recent Hillfort
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
@@ -49,8 +50,7 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val tag = marker.tag as Long
-        val hillfort = presenter.doGetHillfort(tag)
+        val hillfort = marker.tag as HillfortModel
 
         currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort!!.description
