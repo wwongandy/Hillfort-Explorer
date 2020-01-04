@@ -6,7 +6,7 @@
     <string name="hint_hillfortAdditionalNotes">Additional notes</string>
     <string name="menu_addHillfort">Add</string>
     <string name="enter_hillfort_title">Please provide a title and description for the Hillfort</string>
-    <string name="save_hillfort">Save Hillfort</string>
+    <string name="save_hillfort">Save</string>
     <string name="menu_deleteHillfort">Delete</string>
     <string name="select_hillfort_image">Select hillfort image</string>
     <string name="select_more_images">Add more images</string>
