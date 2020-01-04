@@ -47,9 +47,9 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         hillfort.isVisited = isVisited
 
         if (edit) {
-            app.hillforts.update(hillfort.copy(), app.currentUser.id)
+            app.hillforts.update(hillfort.copy(), app.currentUser.uid)
         } else {
-            app.hillforts.create(hillfort.copy(), app.currentUser.id)
+            app.hillforts.create(hillfort.copy(), app.currentUser.uid)
         }
 
         view?.setResult(AppCompatActivity.RESULT_OK)

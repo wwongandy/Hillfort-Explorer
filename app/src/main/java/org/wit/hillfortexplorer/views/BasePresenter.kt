@@ -2,6 +2,7 @@ package org.wit.hillfortexplorer.views
 
 import android.content.Intent
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import org.wit.hillfortexplorer.main.MainApp
 
 open class BasePresenter(var view: BaseView?) {
@@ -9,6 +10,7 @@ open class BasePresenter(var view: BaseView?) {
     var app: MainApp = view?.application as MainApp
 
     fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
         view?.navigateTo(VIEW.AUTHENTICATION)
     }
 

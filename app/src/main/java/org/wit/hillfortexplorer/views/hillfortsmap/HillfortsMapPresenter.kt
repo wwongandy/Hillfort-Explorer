@@ -12,7 +12,7 @@ class HillfortsMapPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun doLoadHillforts(): List<HillfortModel> {
-        return app.hillforts.findAll(app.currentUser.id)
+        return app.hillforts.findAll(app.currentUser.uid)
     }
 
     fun doGetHillfort(tag: Long): HillfortModel? {

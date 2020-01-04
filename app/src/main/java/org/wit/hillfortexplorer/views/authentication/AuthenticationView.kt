@@ -1,6 +1,7 @@
 package org.wit.hillfortexplorer.views.authentication
 
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_authentication.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
@@ -20,25 +21,21 @@ class AuthenticationView: BaseView(), AnkoLogger {
             val _username = username.text.toString()
             val _password = password.text.toString()
 
-            if (_username.isEmpty() || _password.isEmpty()) {
-                toast(R.string.enter_user_pass)
-            } else {
-                presenter.doRegisterUser(_username, _password)
-
-                if (presenter.validRegistration) {
-                    toast(R.string.valid_registration)
-                } else {
-                    toast(R.string.invalid_registration)
-                }
-            }
+            presenter.doRegisterUser(_username, _password)
         }
 
         loginUser.setOnClickListener {
             presenter.doLoginUser(username.text.toString(), password.text.toString())
-
-            if (!presenter.validLogin) {
-                toast(R.string.invalid_login)
-            }
         }
+
+        progressBar.visibility = View.GONE
+    }
+
+    override fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 }

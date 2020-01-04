@@ -30,7 +30,7 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         }
     }
 
-    override fun findAll(userId: Long): List<HillfortModel> {
+    override fun findAll(userId: String): List<HillfortModel> {
         var userHillforts = ArrayList<HillfortModel>()
 
         hillforts.forEach {
@@ -45,7 +45,7 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         return foundHillfort
     }
 
-    override fun create(hillfort: HillfortModel, userId: Long) {
+    override fun create(hillfort: HillfortModel, userId: String) {
         hillfort.userId = userId
         hillfort.id = generateRandomId()
         hillforts.add(hillfort)
@@ -53,7 +53,7 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         serialize()
     }
 
-    override fun update(hillfort: HillfortModel, userId: Long) {
+    override fun update(hillfort: HillfortModel, userId: String) {
         var foundHillfort: HillfortModel ?= hillforts.find { p -> p.id == hillfort.id && p.userId == userId }
 
         if (foundHillfort != null) {
@@ -75,7 +75,7 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
         serialize()
     }
 
-    override fun getUserStatistics(userId: Long): HillfortUserStats {
+    override fun getUserStatistics(userId: String): HillfortUserStats {
         val stats = HillfortUserStats()
         val userHillforts = findAll(userId)
 

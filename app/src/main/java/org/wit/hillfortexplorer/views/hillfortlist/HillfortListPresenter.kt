@@ -21,7 +21,7 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun doLoadHillforts() {
-        view?.showHillforts(app.hillforts.findAll(app.currentUser.id))
+        view?.showHillforts(app.hillforts.findAll(app.currentUser.uid))
     }
 
     override fun doOptionsItemSelected(item: MenuItem) {

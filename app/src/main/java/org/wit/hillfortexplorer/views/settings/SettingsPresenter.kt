@@ -18,25 +18,25 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun getUserStatistics(): HillfortUserStats {
-        return app.hillforts.getUserStatistics(app.currentUser.id)
+        return app.hillforts.getUserStatistics(app.currentUser.uid)
     }
 
     fun doChangeUsername(newUsername: String) {
-        val _username = app.currentUser.username
-        val _password = app.currentUser.password
-
-        app.users.changeUsername(_username, _password, newUsername)
-        app.currentUser = app.users.authenticate(newUsername, _password)
-        usernameChanged = true
+//        val _username = app.currentUser.username
+//        val _password = app.currentUser.password
+//
+//        app.users.changeUsername(_username, _password, newUsername)
+//        app.currentUser = app.users.authenticate(newUsername, _password)
+//        usernameChanged = true
     }
 
     fun doChangePassword(newPassword: String) {
-        val _username = app.currentUser.username
-        val _password = app.currentUser.password
-
-        app.users.changePassword(_username, _password, newPassword)
-        app.currentUser = app.users.authenticate(_username, newPassword)
-        passwordChanged = true
+//        val _username = app.currentUser.username
+//        val _password = app.currentUser.password
+//
+//        app.users.changePassword(_username, _password, newPassword)
+//        app.currentUser = app.users.authenticate(_username, newPassword)
+//        passwordChanged = true
     }
 
     override fun doOptionsItemSelected(item: MenuItem) {
@@ -50,14 +50,17 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun checkCorrectOldUsername(oldPassword: String): Boolean {
-        return sameCredentials(app.currentUser.username, oldPassword)
+//        return sameCredentials(app.currentUser.username, oldPassword)
+        return false
     }
 
     fun checkCorrectOldPassword(oldPassword: String): Boolean {
-        return sameCredentials(app.currentUser.password, oldPassword)
+//        return sameCredentials(app.currentUser.password, oldPassword)
+        return false
     }
 
     fun checkIsDuplicateUsername(newUsername: String): Boolean {
-        return app.users.ensureUniqueCredentials(newUsername, app.currentUser.password)
+//        return app.users.ensureUniqueCredentials(newUsername, app.currentUser.password)
+        return false
     }
 }
