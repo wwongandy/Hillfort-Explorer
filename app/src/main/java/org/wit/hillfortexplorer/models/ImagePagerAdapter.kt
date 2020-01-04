@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.xmlpull.v1.XmlPullParser
@@ -33,7 +34,8 @@ class ImagePagerAdapter(
         layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = layoutInflater!!.inflate(imageLayout, null) as RelativeLayout
         val image = v.findViewById<View>(imageViewId) as ImageView
-        image.setImageBitmap(readImageFromPath(context, images[position]))
+//        image.setImageBitmap(readImageFromPath(context, images[position]))
+        Glide.with(context).load(images[position]).into(image)
 
         val vp = container as ViewPager
         vp.addView(v, 0)
