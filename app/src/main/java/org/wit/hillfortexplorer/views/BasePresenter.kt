@@ -8,6 +8,10 @@ open class BasePresenter(var view: BaseView?) {
 
     var app: MainApp = view?.application as MainApp
 
+    fun doLogout() {
+        view?.navigateTo(VIEW.AUTHENTICATION)
+    }
+
     open fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
     }

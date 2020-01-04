@@ -29,7 +29,7 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view) {
             R.id.item_add -> view?.navigateTo(VIEW.HILLFORT, 0)
             R.id.item_map -> view?.navigateTo(VIEW.HILLFORTSMAP)
             R.id.item_settings -> view?.navigateTo(VIEW.SETTINGS)
-            R.id.item_logout -> view?.navigateTo(VIEW.AUTHENTICATION)
+            R.id.item_logout -> doLogout()
         }
     }
 }
