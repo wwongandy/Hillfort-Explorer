@@ -100,25 +100,6 @@
                     android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/hillfortLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapView"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_margin="16dp" />
-
-                <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,18 +142,32 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
-                <Button
-                    android:id="@+id/btnAdd"
+                <!--                <Button-->
+                <!--                    android:id="@+id/hillfortLocation"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_margin="16dp"-->
+                <!--                    android:background="@color/colorAccent"-->
+                <!--                    android:paddingBottom="8dp"-->
+                <!--                    android:paddingTop="8dp"-->
+                <!--                    android:stateListAnimator="@null"-->
+                <!--                    android:text="@string/button_location"-->
+                <!--                    android:textColor="@color/colorPrimary"-->
+                <!--                    android:textSize="16sp" />-->
+
+                <TextView
+                    android:id="@+id/hillfortLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_addHillfort"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
+                    android:textAlignment="center"
+                    android:text="textView" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_margin="16dp" />
 
             </LinearLayout>
         </ScrollView>
