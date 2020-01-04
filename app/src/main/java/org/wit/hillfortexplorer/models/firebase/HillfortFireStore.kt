@@ -7,7 +7,6 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.hillfortexplorer.helpers.readImageFromPath
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.HillfortStore
@@ -63,6 +62,17 @@ class HillfortFireStore(val context: Context) : HillfortStore, AnkoLogger {
     override fun delete(hillfort: HillfortModel) {
         db.child("users").child(userId).child("hillforts").child(hillfort.fbId).removeValue()
         hillforts.remove(hillfort)
+
+        hillfort.images.forEach { image ->
+            val fileName = File(image)
+            val imageName = fileName.getName()
+            var imageRef = st.child("${userId}/${imageName}")
+            imageRef.delete().addOnSuccessListener {
+
+            }.addOnFailureListener {
+                println(it.message)
+            }
+        }
     }
 
     override fun clear() {
