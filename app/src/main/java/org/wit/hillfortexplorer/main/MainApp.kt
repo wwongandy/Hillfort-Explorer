@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseUser
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.hillfortexplorer.models.*
+import org.wit.hillfortexplorer.models.firebase.HillfortFireStore
 
 class MainApp : Application(), AnkoLogger {
 
@@ -15,6 +16,6 @@ class MainApp : Application(), AnkoLogger {
         super.onCreate()
         info("Hillfort Explorer started")
 
-        hillforts = HillfortJSONStore(applicationContext)
+        hillforts = HillfortFireStore(applicationContext)
     }
 }

@@ -1,6 +1,7 @@
 package org.wit.hillfortexplorer.views.settings
 
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.main.MainApp
@@ -11,16 +12,18 @@ import org.wit.hillfortexplorer.views.VIEW
 
 class SettingsPresenter(view: BaseView): BasePresenter(view) {
 
+    var auth: FirebaseAuth = FirebaseAuth.getInstance()
+
     init {
         app = view.application as MainApp
     }
 
     fun getUserStatistics(): HillfortUserStats {
-        return app.hillforts.getUserStatistics(app.currentUser.uid)
+        return app.hillforts.getUserStatistics(auth.currentUser!!.uid)
     }
 
     fun doChangeUsername(newUsername: String) {
-        app.currentUser.updateEmail(newUsername).addOnCompleteListener { task ->
+        auth.currentUser!!.updateEmail(newUsername).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 view?.toast("Email changed successfully")
             } else {
@@ -30,7 +33,7 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun doChangePassword(newPassword: String) {
-        app.currentUser.updatePassword(newPassword).addOnCompleteListener { task ->
+        auth.currentUser!!.updatePassword(newPassword).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 view?.toast("Password changed successfully")
             } else {
