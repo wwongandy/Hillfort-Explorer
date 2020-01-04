@@ -32,6 +32,7 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
         super.init(toolbar, true)
 
         location = intent.extras?.getParcelable<Location>("location")!!
+        showLocation(location.lat, location.lng)
 
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync {
@@ -79,8 +80,7 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     }
 
     override fun onMarkerDrag(marker: Marker) {
-        lat.setText("%.6f".format(marker.position.latitude))
-        lng.setText("%.6f".format(marker.position.longitude))
+        showLocation(marker.position.latitude, marker.position.longitude)
     }
 
     override fun onMarkerDragEnd(marker: Marker) {
@@ -134,5 +134,10 @@ class EditLocationView : BaseView(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
+    }
+
+    fun showLocation(latitude : Double, longitude : Double) {
+        lat.setText("%.6f".format(latitude))
+        lng.setText("%.6f".format(longitude))
     }
 }
