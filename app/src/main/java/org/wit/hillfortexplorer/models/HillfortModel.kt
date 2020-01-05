@@ -1,13 +1,17 @@
 package org.wit.hillfortexplorer.models
 
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 import kotlin.collections.ArrayList
 
 @Parcelize
+@Entity
 data class HillfortModel(
-    var id: Long = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     var fbId: String = "",
     var title: String = "",
     var description: String = "",
@@ -17,10 +21,12 @@ data class HillfortModel(
     var isVisited: Boolean = false,
     var dateVisited: Date? = null,
     var images: List<String> = ArrayList(),
+    @Embedded
     var location: Location = Location()
 ): Parcelable
 
 @Parcelize
+@Entity
 data class Location(
     var lat: Double = 0.0,
     var lng: Double = 0.0,
