@@ -39,6 +39,8 @@ class HillfortView : BaseView(), AnkoLogger {
 
         if (!presenter.hillfort.isVisited) {
             dateVisited.visibility = View.GONE
+            favouriteButton.visibility = View.GONE
+            ratingSpinner.visibility = View.GONE
         }
 
         chooseImage.setOnClickListener {
@@ -59,8 +61,12 @@ class HillfortView : BaseView(), AnkoLogger {
 
             if (presenter.hillfort.isVisited) {
                 dateVisited.visibility = View.VISIBLE
+                favouriteButton.visibility = View.VISIBLE
+                ratingSpinner.visibility = View.VISIBLE
             } else {
                 dateVisited.visibility = View.GONE
+                favouriteButton.visibility = View.GONE
+                ratingSpinner.visibility = View.GONE
             }
         }
 
