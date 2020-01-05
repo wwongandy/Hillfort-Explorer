@@ -3,6 +3,7 @@ package org.wit.hillfortexplorer.views.hillfortlist
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.wit.hillfortexplorer.R
@@ -26,6 +27,24 @@ class HillfortListView : BaseView(), HillfortListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         presenter.doLoadHillforts()
+
+        favouriteCheck.setOnClickListener {
+            presenter.doFilterHillforts(searchBox.query.toString(), favouriteCheck.isChecked)
+        }
+
+        searchBox.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                presenter.doFilterHillforts(searchBox.query.toString(), favouriteCheck.isChecked)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                presenter.doFilterHillforts(searchBox.query.toString(), favouriteCheck.isChecked)
+                return false
+            }
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
