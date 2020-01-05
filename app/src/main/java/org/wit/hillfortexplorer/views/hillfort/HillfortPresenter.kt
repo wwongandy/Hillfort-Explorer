@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.helpers.checkLocationPermissions
@@ -86,6 +87,25 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
 
     override fun doOptionsItemSelected(item: MenuItem) {
         when (item?.itemId) {
+            R.id.item_share -> {
+                if (edit) {
+                    var intent = Intent()
+
+                    // Allow sharing the text to other apps
+                    intent.setAction(Intent.ACTION_SEND)
+                    intent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "I am using the HillfortExplorer app! I found ${hillfort.title}!"
+                    )
+                    intent.setType("text/plain")
+
+                    // Perform the sharing
+                    view?.startActivity(intent)
+                } else {
+                    view?.toast("You need to save the Hillfort first before sharing!")
+                }
+            }
+
             R.id.item_delete -> {
                 doAsync {
                     app.hillforts.delete(hillfort)

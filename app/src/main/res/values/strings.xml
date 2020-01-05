@@ -52,7 +52,6 @@
     <string name="favourite_hillfort">Favourite</string>
     <string name="button_directions">Directions</string>
     <string name="menu_shareHillfort">Share</string>
-    <string name="action_shareHillfort">I am using the HillfortExplorer app! I found</string>
 
     <string-array name="rating_options">
         <item>1</item>
