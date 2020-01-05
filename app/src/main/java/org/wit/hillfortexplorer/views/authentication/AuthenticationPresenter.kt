@@ -22,7 +22,15 @@ class AuthenticationPresenter(view: BaseView): BasePresenter(view) {
         view?.showProgress()
         auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
-                view?.navigateTo(VIEW.HILLFORTLIST)
+                if (fireStore != null) {
+                    fireStore!!.fetchHillforts {
+                        view?.hideProgress()
+                        view?.navigateTo(VIEW.HILLFORTLIST)
+                    }
+                } else {
+                    view?.hideProgress()
+                    view?.navigateTo(VIEW.HILLFORTLIST)
+                }
             } else {
                 view?.toast("Sign Up Failed: ${task.exception?.message}")
             }

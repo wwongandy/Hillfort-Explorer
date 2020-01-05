@@ -21,11 +21,22 @@ class AuthenticationView: BaseView(), AnkoLogger {
             val _username = username.text.toString()
             val _password = password.text.toString()
 
-            presenter.doRegisterUser(_username, _password)
+            if (_username.isNotEmpty() && _password.isNotEmpty()) {
+                presenter.doRegisterUser(_username, _password)
+            } else {
+                toast("You cannot leave a field empty!")
+            }
         }
 
         loginUser.setOnClickListener {
-            presenter.doLoginUser(username.text.toString(), password.text.toString())
+            val _username = username.text.toString()
+            val _password = password.text.toString()
+
+            if (_username.isNotEmpty() && _password.isNotEmpty()) {
+                presenter.doLoginUser(_username, _password)
+            } else {
+                toast("You cannot leave a field empty!")
+            }
         }
 
         progressBar.visibility = View.GONE
