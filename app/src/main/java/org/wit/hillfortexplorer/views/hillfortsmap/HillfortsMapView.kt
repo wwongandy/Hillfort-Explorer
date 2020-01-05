@@ -20,7 +20,6 @@ import org.wit.hillfortexplorer.views.BaseView
 class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
     lateinit var presenter: HillfortsMapPresenter
-    lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,28 +30,8 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
-            map = it
-            configureMap()
-        }
-    }
-
-    fun configureMap() {
-        map.setOnMarkerClickListener(this)
-        map.uiSettings.isZoomControlsEnabled = true
-
-        doAsync {
-            val hillforts = presenter.doLoadHillforts()
-
-            uiThread {
-                hillforts.forEach {
-                    val loc = LatLng(it.location.lat, it.location.lng)
-                    val options = MarkerOptions().title(it.title).position(loc)
-                    map.addMarker(options).tag = it
-
-                    // Move camera to most recent Hillfort
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
-                }
-            }
+            presenter.doConfigureMap(it)
+            it.setOnMarkerClickListener(this)
         }
     }
 
