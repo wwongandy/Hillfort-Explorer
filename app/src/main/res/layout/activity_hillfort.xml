@@ -79,19 +79,19 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
-                <RadioButton
-                    android:id="@+id/favouriteButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/favourite_hillfort"
-                    android:layout_margin="8dp" />
-
                 <Spinner
                     android:id="@+id/ratingSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:entries="@array/rating_options" />
+
+                <CheckBox
+                    android:id="@+id/favouriteButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/favourite_hillfort" />
 
                 <CheckBox
                     android:id="@+id/isVisited"
