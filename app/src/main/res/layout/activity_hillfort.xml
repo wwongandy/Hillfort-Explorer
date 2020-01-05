@@ -79,6 +79,13 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:entries="@array/rating_options" />
+
                 <CheckBox
                     android:id="@+id/isVisited"
                     android:layout_width="match_parent"

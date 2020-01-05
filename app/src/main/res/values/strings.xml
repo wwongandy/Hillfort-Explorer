@@ -49,4 +49,12 @@
     <string name="title_activity_hillfort">Hillfort</string>
     <string name="title_activity_hillfort_list">Hillforts</string>
     <string name="title_activity_settings">Settings</string>
+
+    <string-array name="rating_options">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
