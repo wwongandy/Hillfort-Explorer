@@ -50,6 +50,7 @@
     <string name="title_activity_hillfort_list">Hillforts</string>
     <string name="title_activity_settings">Settings</string>
     <string name="favourite_hillfort">Favourite</string>
+    <string name="button_directions">Directions</string>
 
     <string-array name="rating_options">
         <item>1</item>
