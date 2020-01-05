@@ -33,6 +33,10 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
             presenter.doConfigureMap(it)
             it.setOnMarkerClickListener(this)
         }
+
+        directions.setOnClickListener {
+            presenter.doHandleDirections()
+        }
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -41,6 +45,8 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
         currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort!!.description
         mapsImagePager.adapter = ImagePagerAdapter(this, hillfort.images, R.layout.form_image_hillfort, R.id.formImageIcon)
+
+        presenter.notifySelectedHillfort(hillfort)
 
         return true
     }
@@ -63,6 +69,7 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        presenter.doRestartLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
