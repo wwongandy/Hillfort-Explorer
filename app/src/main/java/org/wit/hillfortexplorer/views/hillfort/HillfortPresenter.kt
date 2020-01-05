@@ -40,11 +40,12 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         }
     }
 
-    fun doCreateOrUpdate(title: String, description: String, additionalNotes: String, isVisited: Boolean) {
+    fun doCreateOrUpdate(title: String, description: String, additionalNotes: String, isVisited: Boolean, rating: Int) {
         hillfort.title = title
         hillfort.description = description
         hillfort.additionalNotes = additionalNotes
         hillfort.isVisited = isVisited
+        hillfort.rating = rating
 
         if (edit) {
             app.hillforts.update(hillfort.copy())
