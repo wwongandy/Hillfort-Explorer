@@ -6,6 +6,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.hillfortexplorer.models.*
 import org.wit.hillfortexplorer.models.firebase.HillfortFireStore
+import org.wit.hillfortexplorer.models.room.HillfortStoreRoom
 
 class MainApp : Application(), AnkoLogger {
 

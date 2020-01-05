@@ -3,6 +3,8 @@ package org.wit.hillfortexplorer.views
 import android.content.Intent
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.hillfortexplorer.main.MainApp
 
 open class BasePresenter(var view: BaseView?) {
@@ -11,8 +13,14 @@ open class BasePresenter(var view: BaseView?) {
 
     fun doLogout() {
         FirebaseAuth.getInstance().signOut()
-        app.hillforts.clear()
-        view?.navigateTo(VIEW.AUTHENTICATION)
+
+        doAsync {
+            app.hillforts.clear()
+
+            uiThread {
+                view?.navigateTo(VIEW.AUTHENTICATION)
+            }
+        }
     }
 
     open fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

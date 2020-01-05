@@ -14,8 +14,4 @@ class HillfortsMapPresenter(view: BaseView): BasePresenter(view) {
     fun doLoadHillforts(): List<HillfortModel> {
         return app.hillforts.findAll()
     }
-
-    fun doGetHillfort(tag: Long): HillfortModel? {
-        return app.hillforts.findById(tag)
-    }
 }

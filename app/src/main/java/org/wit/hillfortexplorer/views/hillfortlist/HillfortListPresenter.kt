@@ -2,8 +2,10 @@ package org.wit.hillfortexplorer.views.hillfortlist
 
 import android.content.Intent
 import android.view.MenuItem
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.uiThread
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.views.hillfort.HillfortView
 import org.wit.hillfortexplorer.views.hillfortsmap.HillfortsMapView
@@ -21,7 +23,13 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun doLoadHillforts() {
-        view?.showHillforts(app.hillforts.findAll())
+        doAsync {
+            val hillforts = app.hillforts.findAll()
+
+            uiThread {
+                view?.showHillforts(hillforts)
+            }
+        }
     }
 
     override fun doOptionsItemSelected(item: MenuItem) {

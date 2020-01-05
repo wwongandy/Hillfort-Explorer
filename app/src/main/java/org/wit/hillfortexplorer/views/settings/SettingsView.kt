@@ -5,7 +5,9 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.models.HillfortUserStats
 import org.wit.hillfortexplorer.views.BaseView
@@ -21,7 +23,13 @@ class SettingsView: BaseView(), AnkoLogger {
 
         init(toolbarSettings, true)
 
-        setUserStatistics(presenter.getUserStatistics())
+        doAsync {
+            val statistics = presenter.getUserStatistics()
+
+            uiThread {
+                setUserStatistics(statistics)
+            }
+        }
 
         changeUsername.setOnClickListener {
             val newUsername = newUsername.text.toString()

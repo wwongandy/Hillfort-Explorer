@@ -11,6 +11,8 @@ import org.wit.hillfortexplorer.R
 
 import kotlinx.android.synthetic.main.activity_hillforts_map.*
 import kotlinx.android.synthetic.main.content_hillforts_map.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.hillfortexplorer.models.HillfortModel
 import org.wit.hillfortexplorer.models.ImagePagerAdapter
 import org.wit.hillfortexplorer.views.BaseView
@@ -35,18 +37,23 @@ class HillfortsMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     }
 
     fun configureMap() {
+        map.setOnMarkerClickListener(this)
         map.uiSettings.isZoomControlsEnabled = true
 
-        presenter.doLoadHillforts().forEach {
-            val loc = LatLng(it.location.lat, it.location.lng)
-            val options = MarkerOptions().title(it.title).position(loc)
-            map.addMarker(options).tag = it
+        doAsync {
+            val hillforts = presenter.doLoadHillforts()
 
-            // Move camera to most recent Hillfort
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
+            uiThread {
+                hillforts.forEach {
+                    val loc = LatLng(it.location.lat, it.location.lng)
+                    val options = MarkerOptions().title(it.title).position(loc)
+                    map.addMarker(options).tag = it
+
+                    // Move camera to most recent Hillfort
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
+                }
+            }
         }
-
-        map.setOnMarkerClickListener(this)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

@@ -10,6 +10,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.hillfortexplorer.R
 import org.wit.hillfortexplorer.helpers.checkLocationPermissions
 import org.wit.hillfortexplorer.helpers.isPermissionGranted
@@ -48,14 +50,18 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         hillfort.rating = rating
         hillfort.favourite = favourite
 
-        if (edit) {
-            app.hillforts.update(hillfort.copy())
-        } else {
-            app.hillforts.create(hillfort.copy())
-        }
+        doAsync {
+            if (edit) {
+                app.hillforts.update(hillfort.copy())
+            } else {
+                app.hillforts.create(hillfort.copy())
+            }
 
-        view?.setResult(AppCompatActivity.RESULT_OK)
-        view?.finish()
+            uiThread {
+                view?.setResult(AppCompatActivity.RESULT_OK)
+                view?.finish()
+            }
+        }
     }
 
     fun doRemoveImage(currentImageItem: Int) {
@@ -81,8 +87,13 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
     override fun doOptionsItemSelected(item: MenuItem) {
         when (item?.itemId) {
             R.id.item_delete -> {
-                app.hillforts.delete(hillfort)
-                view?.finish()
+                doAsync {
+                    app.hillforts.delete(hillfort)
+
+                    uiThread {
+                        view?.finish()
+                    }
+                }
             }
         }
     }
