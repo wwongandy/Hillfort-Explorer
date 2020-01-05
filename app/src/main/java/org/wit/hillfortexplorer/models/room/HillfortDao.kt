@@ -9,7 +9,7 @@ interface HillfortDao {
     @Query("SELECT * FROM HillfortModel")
     fun findAll(): List<HillfortModel>
 
-    @Query("select * from HillfortModel where id = :id")
+    @Query("select * from HillfortModel where id = :hillfortId")
     fun findById(hillfortId: Long): HillfortModel?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
