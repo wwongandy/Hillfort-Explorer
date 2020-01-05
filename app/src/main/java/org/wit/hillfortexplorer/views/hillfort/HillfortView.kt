@@ -109,7 +109,7 @@ class HillfortView : BaseView(), AnkoLogger {
                 if (hillfortTitle.text.toString().isEmpty() || description.text.toString().isEmpty()) {
                     toast(R.string.enter_hillfort_title)
                 } else {
-                    presenter.doCreateOrUpdate(hillfortTitle.text.toString(), description.text.toString(), additionalNotes.text.toString(), isVisited.isChecked, ratingSpinner.selectedItemPosition)
+                    presenter.doCreateOrUpdate(hillfortTitle.text.toString(), description.text.toString(), additionalNotes.text.toString(), isVisited.isChecked, ratingSpinner.selectedItemPosition, favouriteButton.isChecked)
                 }
             }
         }
@@ -123,6 +123,7 @@ class HillfortView : BaseView(), AnkoLogger {
         additionalNotes.setText(hillfort.additionalNotes)
         isVisited.isChecked = hillfort.isVisited
         ratingSpinner.setSelection(hillfort.rating)
+        favouriteButton.isChecked = hillfort.favourite
         updateHillfortImagesView(hillfort)
     }
 
