@@ -48,6 +48,7 @@ class SettingsView: BaseView(), AnkoLogger {
         statsView.setText(
             "Total number of hillforts: ${statistics.totalNumberOfHillforts}\n" +
             "Number of hillforts visited: ${statistics.visitedHillforts}\n" +
+            "Number of hillforts favourited: ${statistics.favouritedHillforts}\n" +
             "Visited this year: ${statistics.visitedThisYear}\n" +
             "Visited this month: ${statistics.visitedThisMonth}"
         )

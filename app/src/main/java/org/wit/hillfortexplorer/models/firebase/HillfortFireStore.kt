@@ -90,6 +90,7 @@ class HillfortFireStore(val context: Context) : HillfortStore, AnkoLogger {
 
         stats.totalNumberOfHillforts = userHillforts.size
         stats.visitedHillforts = userHillforts.count { p -> p.isVisited }
+        stats.favouritedHillforts = userHillforts.count { p -> p.favourite }
         stats.visitedThisYear = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear }
         stats.visitedThisMonth = userHillforts.count { p -> p.dateVisited != null && p.dateVisited?.year == thisYear && p.dateVisited?.month == thisMonth }
 

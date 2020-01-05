@@ -31,6 +31,7 @@ data class Location(
 data class HillfortUserStats(
     var totalNumberOfHillforts: Int = 0,
     var visitedHillforts: Int = 0,
+    var favouritedHillforts: Int = 0,
     var visitedThisYear: Int = 0,
     var visitedThisMonth: Int = 0
 ) : Parcelable
