@@ -86,32 +86,41 @@
                     android:layout_margin="8dp"
                     android:text="@string/hint_hillfortIsVisited" />
 
-                <Spinner
-                    android:id="@+id/ratingSpinner"
+                <LinearLayout
+                    android:id="@+id/visitedOptions"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="180dp"
                     android:layout_margin="8dp"
-                    android:entries="@array/rating_options" />
+                    android:orientation="vertical"
+                    android:background="@drawable/visited_options_border">
 
-                <CheckBox
-                    android:id="@+id/favouriteButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="@string/favourite_hillfort" />
+                    <Spinner
+                        android:id="@+id/ratingSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:entries="@array/rating_options" />
 
-                <Button
-                    android:id="@+id/dateVisited"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_dateVisited"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
+                    <CheckBox
+                        android:id="@+id/favouriteButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/favourite_hillfort" />
+
+                    <Button
+                        android:id="@+id/dateVisited"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:background="@color/colorAccent"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:stateListAnimator="@null"
+                        android:text="@string/button_dateVisited"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/chooseImage"
