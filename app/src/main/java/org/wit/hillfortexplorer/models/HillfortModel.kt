@@ -13,6 +13,7 @@ data class HillfortModel(
     var description: String = "",
     var additionalNotes: String = "",
     var rating: Int = 1,
+    var favourite: Boolean = true,
     var isVisited: Boolean = false,
     var dateVisited: Date? = null,
     var images: List<String> = ArrayList(),
