@@ -18,3 +18,6 @@ This mobile app uses the Google Maps API, therefore a Google Maps API key is req
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_GOOGLE_MAPS_API_KEY_HERE</string>
 </resources>
 ```
+
+#### Google Firebase Authentication
+In addition to the mobile app, Firebase's Authentication, Database and Storage utilities are used. In order to make this integration work, a `app/google-services.json` file is required. Read [this](https://developers.google.com/android/guides/google-services-plugin) article for retrieving one.
